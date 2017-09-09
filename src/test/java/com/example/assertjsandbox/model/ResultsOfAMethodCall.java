@@ -9,7 +9,7 @@ import java.util.List;
 public class ResultsOfAMethodCall {
 
 	/**
-	 * brandsの中からBrand#getNameの結果が一致するnameを抽出
+	 * brandsの中からBrand#getNameInitialの結果が一致するnameを抽出
 	 */
 	@Test
 	public void extractingResultOf() {
@@ -21,7 +21,7 @@ public class ResultsOfAMethodCall {
 		List<Brand> brands = Arrays.asList(stof, bedsidedrama, sneeuw, ethosens, dulcamara);
 
 		Assertions.assertThat(brands)
-				.extractingResultOf("getName")
-				.contains("stof", "bedsidedrama", "sneeuw", "ETHOSENS", "Dulcamara");
+				.extractingResultOf("getNameInitial")
+				.contains("s", "b", "E", "D");
 	}
 }

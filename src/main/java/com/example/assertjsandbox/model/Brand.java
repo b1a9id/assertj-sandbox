@@ -15,4 +15,8 @@ public class Brand {
 	private String designer;
 
 	private Gender gender;
+
+	public String getNameInitial() {
+		return getName().substring(0, 1);
+	}
 }
