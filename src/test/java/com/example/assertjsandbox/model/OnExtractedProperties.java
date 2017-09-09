@@ -1,4 +1,4 @@
-package com.example.assertjsandbox.feature_highlight;
+package com.example.assertjsandbox.model;
 
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
@@ -80,7 +80,7 @@ public class OnExtractedProperties {
 						Assertions.tuple("sneeuw", Gender.WOMAN),
 						Assertions.tuple("ETHOSENS", Gender.MAN));
 	}
-	
+
 	@Test
 	public void brandsContainsBrandMatchNameAndGenderPropertiesAndNotContains() {
 		Brand stof = new Brand("stof", "Tanita", Gender.MAN);

@@ -1,4 +1,4 @@
-package com.example.assertjsandbox.feature_highlight;
+package com.example.assertjsandbox.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
