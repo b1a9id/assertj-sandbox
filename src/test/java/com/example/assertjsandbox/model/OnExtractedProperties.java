@@ -1,6 +1,7 @@
 package com.example.assertjsandbox.model;
 
 import org.assertj.core.api.Assertions;
+import org.assertj.core.groups.Tuple;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -98,5 +99,33 @@ public class OnExtractedProperties {
 				.doesNotContain(
 						Assertions.tuple("Portaille", Gender.MAN)
 				);
+	}
+
+	/**
+	 * Tuple#tupleを使用した複数プロパティの検証
+	 */
+	@Test
+	public void multiPropertiesExtractingForTuple() {
+		Brand stof = new Brand("stof", "Tanita", Gender.MAN);
+		Brand ethosens = new Brand("ETHOSENS", "Hashimoto", Gender.MAN);
+		List<Brand> brands = Arrays.asList(stof, ethosens);
+
+		Assertions.assertThat(brands)
+				.extracting(Brand::getName, Brand::getGender)
+				.containsExactly(
+						Tuple.tuple("stof", Gender.MAN),
+						Tuple.tuple("ETHOSENS", Gender.MAN)
+				);
+	}
+
+	@Test
+	public void multiPropertiesExtractingForFlatExtracting() {
+		Brand stof = new Brand("stof", "Tanita", Gender.MAN);
+		Brand ethosens = new Brand("ETHOSENS", "Hashimoto", Gender.MAN);
+		List<Brand> brands = Arrays.asList(stof, ethosens);
+
+		Assertions.assertThat(brands)
+				.flatExtracting(Brand::getName, Brand::getGender)
+				.containsExactly("stof", Gender.MAN, "ETHOSENS", Gender.MAN);
 	}
 }
