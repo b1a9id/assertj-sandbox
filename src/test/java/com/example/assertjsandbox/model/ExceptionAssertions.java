@@ -20,7 +20,7 @@ public class ExceptionAssertions {
 	 * throwされたExceptionクラスとメッセージの検証
 	 */
 	@Test
-	public void assertionExceptionClassAndMessegeAndCause() {
+	public void assertionExceptionClassAndMessageAndCause() {
 		Assertions.assertThatExceptionOfType(IOException.class)
 				.isThrownBy(() -> {
 					throw new IOException("exception!!!");
