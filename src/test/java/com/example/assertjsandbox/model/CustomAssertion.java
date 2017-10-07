@@ -8,6 +8,8 @@ public class CustomAssertion {
 	public void brandAssertion() {
 		Brand stof = new Brand("stof", "Tanita", Gender.MAN);
 
-		BrandAssert.assertThat(stof).hasName("stof");
+		BrandAssert.assertThat(stof)
+				.hasName("stof")
+				.hasGender(Gender.MAN);
 	}
 }
