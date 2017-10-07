@@ -12,7 +12,7 @@ public class FlatExtracting {
 	 * brandsのbrandNameプロパティに「stof」「storama」「prasthana」「protaille」を含んでいる
 	 */
 	@Test
-	public void flatExtractineg() {
+	public void flatExtracting() {
 		InitialCharBrand stof = new InitialCharBrand("stof", "Tanita", Gender.MAN);
 		InitialCharBrand storama = new InitialCharBrand("storama", "Tanita", Gender.MAN);
 		InitialCharBrand initialSBrand = new InitialCharBrand();
@@ -26,6 +26,6 @@ public class FlatExtracting {
 
 		Assertions.assertThat(brands)
 				.flatExtracting("initialCharBrands")
-				.contains(stof, storama, prasthana, portaille);
+				.containsExactly(stof, storama, prasthana, portaille);
 	}
 }
