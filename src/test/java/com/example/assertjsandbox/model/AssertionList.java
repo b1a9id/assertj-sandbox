@@ -21,6 +21,18 @@ public class AssertionList {
 	}
 
 	@Test
+	public void listAssertion () {
+		Brand stof = new Brand("stof", "Tanita", Gender.MAN);
+		Brand bedsidedrama = new Brand("bedsidedrama", "Tanita", Gender.MAN);
+		Brand ethosens = new Brand("ETHOSENS", "Hashimoto", Gender.MAN);
+		List<Brand> brands = Arrays.asList(stof, bedsidedrama, ethosens);
+
+		Assertions.assertThat(brands)
+				.extracting(Brand::getName)
+				.containsExactly("stof", "bedsidedrama", "ETHOSENS");
+	}
+
+	@Test
 	public void instanceOf() {
 		Brand stof = new Brand("stof", "Tanita", Gender.MAN);
 
