@@ -14,8 +14,9 @@ public class FieldByFieldComparisons {
 		Brand cloneStof = new Brand("stof", "Tanita", Gender.MAN);
 
 		// オブジェクトを比較すると異なる
-		Assertions.assertThat(stof).isNotEqualTo(cloneStof);
-		Assertions.assertThat(stof).isEqualToComparingFieldByField(cloneStof);
+		Assertions.assertThat(stof)
+				.isNotEqualTo(cloneStof)
+				.isEqualToComparingFieldByField(cloneStof);
 	}
 
 	/**
@@ -27,8 +28,9 @@ public class FieldByFieldComparisons {
 		Brand ethosens = new Brand("ETHOSENS", "Hashimoto", Gender.MAN);
 		Brand storama = new Brand("storama", "Tanita", Gender.MAN);
 
-		Assertions.assertThat(stof).isEqualToComparingOnlyGivenFields(ethosens, "gender");
-		Assertions.assertThat(stof).isEqualToComparingOnlyGivenFields(storama, "designer", "gender");
+		Assertions.assertThat(stof)
+				.isEqualToComparingOnlyGivenFields(ethosens, "gender")
+				.isEqualToComparingOnlyGivenFields(storama, "designer", "gender");
 	}
 
 	/**
@@ -40,8 +42,9 @@ public class FieldByFieldComparisons {
 		Brand ethosens = new Brand("ETHOSENS", "Hashimoto", Gender.MAN);
 		Brand storama = new Brand("storama", "Tanita", Gender.MAN);
 
-		Assertions.assertThat(stof).isEqualToIgnoringGivenFields(ethosens, "name", "designer");
-		Assertions.assertThat(stof).isEqualToIgnoringGivenFields(storama, "name");
+		Assertions.assertThat(stof)
+				.isEqualToIgnoringGivenFields(ethosens, "name", "designer")
+				.isEqualToIgnoringGivenFields(storama, "name");
 	}
 
 	/**
