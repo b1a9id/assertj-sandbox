@@ -1,11 +1,12 @@
-package com.example.assertjsandbox.model;
+package com.example.assertjsandbox.exception;
 
+import com.example.assertjsandbox.model.Brand;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 import java.io.IOException;
 
-public class ExceptionAssertions {
+public class ExceptionAssertion {
 	/**
 	 * throwされたExceptionクラスとメッセージの検証
 	 */

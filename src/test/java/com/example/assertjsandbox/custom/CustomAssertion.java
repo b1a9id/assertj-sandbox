@@ -1,5 +1,6 @@
-package com.example.assertjsandbox.model;
+package com.example.assertjsandbox.custom;
 
+import com.example.assertjsandbox.model.*;
 import org.junit.Test;
 
 public class CustomAssertion {

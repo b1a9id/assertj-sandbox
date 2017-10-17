@@ -1,5 +1,6 @@
-package com.example.assertjsandbox.model;
+package com.example.assertjsandbox.collection;
 
+import com.example.assertjsandbox.model.*;
 import org.assertj.core.api.Assertions;
 import org.assertj.core.groups.Tuple;
 import org.junit.Test;

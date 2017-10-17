@@ -1,5 +1,6 @@
-package com.example.assertjsandbox.model;
+package com.example.assertjsandbox.collection;
 
+import com.example.assertjsandbox.model.*;
 import org.assertj.core.api.Assertions;
 import org.assertj.core.api.Condition;
 import org.junit.Test;
@@ -7,7 +8,7 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.List;
 
-public class CombiningFilteringAndAssertions {
+public class UseFilteringAssertion {
 
 	/**
 	 * brandsの中で、nameに「e」を含んでいるものを抽出

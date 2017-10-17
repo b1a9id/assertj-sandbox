@@ -1,5 +1,6 @@
-package com.example.assertjsandbox.model;
+package com.example.assertjsandbox.custom;
 
+import com.example.assertjsandbox.model.*;
 import org.assertj.core.api.AbstractAssert;
 
 import java.util.Objects;

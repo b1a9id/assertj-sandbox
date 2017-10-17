@@ -1,9 +1,59 @@
-package com.example.assertjsandbox.model;
+package com.example.assertjsandbox.object;
 
+import com.example.assertjsandbox.model.*;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
-public class FieldByFieldComparisons {
+import java.time.LocalDate;
+
+public class ObjectAssertion {
+
+	/**
+	 * timeパッケージの検証
+	 */
+	@Test
+	public void localDateAssert() {
+		LocalDate now = LocalDate.now();
+		LocalDate past = LocalDate.of(2017, 1,1);
+		LocalDate future = LocalDate.of(2099, 12,31);
+
+		Assertions.assertThat(now).isAfter(past);
+		Assertions.assertThat(past).isBefore(now);
+		Assertions.assertThat(now).isBetween(past, future);
+		Assertions.assertThat(now).isToday();
+	}
+
+	@Test
+	public void nullAssertion() {
+		String nullStr = null;
+		String notNullStr = "TEST";
+		String blackStr = "";
+
+		Assertions.assertThat(nullStr).isNull();
+		Assertions.assertThat(notNullStr).isNotNull();
+		Assertions.assertThat(blackStr).isNullOrEmpty();
+		Assertions.assertThat(nullStr).isNullOrEmpty();
+	}
+
+	/**
+	 * インスタンスのクラスを検証
+	 */
+	@Test
+	public void instanceOf() {
+		Brand stof = new Brand("stof", "Tanita", Gender.MAN);
+
+		Assertions.assertThat(stof).isInstanceOf(Brand.class);
+		Assertions.assertThat(stof).isNotInstanceOf(InitialCharBrand.class);
+	}
+
+	/**
+	 * 同じインスタンスであるかの検証
+	 */
+	@Test
+	public void sameInstance() {
+		Brand stof = new Brand("stof", "Tanita", Gender.MAN);
+		Assertions.assertThat(stof).isSameAs(stof);
+	}
 
 	/**
 	 * 全フィールドの値を検証
