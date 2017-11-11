@@ -1,5 +1,7 @@
-package com.example.assertjsandbox.model;
+package com.example.assertjsandbox.softassertion;
 
+import com.example.assertjsandbox.model.Brand;
+import com.example.assertjsandbox.model.Gender;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Test;
 
@@ -22,7 +24,7 @@ public class SoftAssertionSample {
 	}
 
 	/**
-	 * SoftAssertions#assertSoftlyを使う。
+	 * SoftAssertions#assertSoftlyを使う。z
 	 * 複数の検証がある場合にテストを止めることなく、全体を検証した後にログを出力する
 	 */
 	@Test
