@@ -18,6 +18,16 @@ public class ExceptionAssertion {
 	}
 
 	/**
+	 * NullPointerExceptionがthrowされることの検証
+	 */
+	@Test
+	public void assertionIllegalArgumentException() {
+		String test = null;
+		Assertions.assertThatNullPointerException()
+				.isThrownBy(test::toUpperCase);
+	}
+
+	/**
 	 * throwされたExceptionクラスとメッセージの検証
 	 */
 	@Test
