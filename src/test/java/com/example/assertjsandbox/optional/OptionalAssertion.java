@@ -69,6 +69,20 @@ public class OptionalAssertion {
 				.containsSame(stofCopy);
 	}
 
+	/**
+	 * オブジェクトの検証
+	 */
+	@Test
+	public void objectAssertion() {
+		Brand stof = new Brand("stof", "Tanita", Gender.MAN);
+		Assertions.assertThat(Optional.of(stof))
+				.hasValueSatisfying(b -> {
+					Assertions.assertThat(b.getName()).isEqualTo("stof");
+					Assertions.assertThat(b.getDesigner()).isEqualTo("Tanita");
+					Assertions.assertThat(b.getGender()).isEqualTo(Gender.MAN);
+				});
+	}
+
 	@Test
 	public void map() {
 		Assertions.assertThat(Optional.of("stof"))
