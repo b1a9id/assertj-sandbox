@@ -6,6 +6,8 @@ import org.junit.Test;
 
 import java.time.LocalDate;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 public class ObjectAssertion {
 
 	/**
@@ -81,6 +83,17 @@ public class ObjectAssertion {
 		Assertions.assertThat(stof)
 				.isEqualToComparingOnlyGivenFields(ethosens, "gender")
 				.isEqualToComparingOnlyGivenFields(storama, "designer", "gender");
+	}
+
+	/**
+	 * 指定したフィールドの値を検証
+	 */
+	@Test
+	public void addExtractingFunctionArg() {
+		Brand brand = new Brand("STOF", "Tanita", Gender.MAN);
+		assertThat(brand)
+				.extracting(Brand::getName)
+				.isEqualTo("STOF");
 	}
 
 	/**
