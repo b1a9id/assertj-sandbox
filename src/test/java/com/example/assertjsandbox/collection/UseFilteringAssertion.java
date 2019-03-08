@@ -1,20 +1,22 @@
 package com.example.assertjsandbox.collection;
 
-import com.example.assertjsandbox.model.*;
-import org.assertj.core.api.Assertions;
-import org.assertj.core.api.Condition;
-import org.junit.Test;
-
 import java.util.Arrays;
 import java.util.List;
 
-public class UseFilteringAssertion {
+import org.assertj.core.api.Assertions;
+import org.assertj.core.api.Condition;
+import org.junit.jupiter.api.Test;
+
+import com.example.assertjsandbox.model.Brand;
+import com.example.assertjsandbox.model.Gender;
+
+class UseFilteringAssertion {
 
 	/**
 	 * brandsの中で、nameに「e」を含んでいるものを抽出
 	 */
 	@Test
-	public void filteringPredicate() {
+	void filteringPredicate() {
 		Brand stof = new Brand("stof", "Tanita", Gender.MAN);
 		Brand bedsidedrama = new Brand("bedsidedrama", "Tanita", Gender.MAN);
 		Brand sneeuw = new Brand("sneeuw", "Yukiura", Gender.WOMAN);
@@ -31,7 +33,7 @@ public class UseFilteringAssertion {
 	 * brandsの中でgenderがMANのものだけ抽出
 	 */
 	@Test
-	public void filteringMatchPropertyValues() {
+	void filteringMatchPropertyValues() {
 		Brand stof = new Brand("stof", "Tanita", Gender.MAN);
 		Brand bedsidedrama = new Brand("bedsidedrama", "Tanita", Gender.MAN);
 		Brand sneeuw = new Brand("sneeuw", "Yukiura", Gender.WOMAN);
@@ -48,7 +50,7 @@ public class UseFilteringAssertion {
 	 * brandsの中でgenderがMANでないものだけ抽出
 	 */
 	@Test
-	public void filteringNotMatchPropertyValues() {
+	void filteringNotMatchPropertyValues() {
 		Brand stof = new Brand("stof", "Tanita", Gender.MAN);
 		Brand bedsidedrama = new Brand("bedsidedrama", "Tanita", Gender.MAN);
 		Brand sneeuw = new Brand("sneeuw", "Yukiura", Gender.WOMAN);
@@ -65,7 +67,7 @@ public class UseFilteringAssertion {
 	 * brandsの中でnameに"sneeuw", "Dulcamara"を含むものだけ抽出
 	 */
 	@Test
-	public void filteringIncludePropertyValues() {
+	void filteringIncludePropertyValues() {
 		Brand stof = new Brand("stof", "Tanita", Gender.MAN);
 		Brand bedsidedrama = new Brand("bedsidedrama", "Tanita", Gender.MAN);
 		Brand sneeuw = new Brand("sneeuw", "Yukiura", Gender.WOMAN);
@@ -82,7 +84,7 @@ public class UseFilteringAssertion {
 	 * brandsの中でnameに"sneeuw", "Dulcamara"を含まないものだけ抽出
 	 */
 	@Test
-	public void filteringNoIncludePropertyValues() {
+	void filteringNoIncludePropertyValues() {
 		Brand stof = new Brand("stof", "Tanita", Gender.MAN);
 		Brand bedsidedrama = new Brand("bedsidedrama", "Tanita", Gender.MAN);
 		Brand sneeuw = new Brand("sneeuw", "Yukiura", Gender.WOMAN);
@@ -99,7 +101,7 @@ public class UseFilteringAssertion {
 	 * brandsの中でnameに「e」を含んでいてかつ、genderがMANのものを抽出
 	 */
 	@Test
-	public void filteringMatchMultiplePropertiesValue() {
+	void filteringMatchMultiplePropertiesValue() {
 		Brand stof = new Brand("stof", "Tanita", Gender.MAN);
 		Brand bedsidedrama = new Brand("bedsidedrama", "Tanita", Gender.MAN);
 		Brand sneeuw = new Brand("sneeuw", "Yukiura", Gender.WOMAN);
@@ -117,7 +119,7 @@ public class UseFilteringAssertion {
 	 * Conditionクラスを使用したフィルタリング
 	 */
 	@Test
-	public void filteringWithCondition() {
+	void filteringWithCondition() {
 		Condition<Brand> includeEBrands = new Condition<Brand>() {
 			@Override
 			public boolean matches(Brand brand) {
@@ -141,7 +143,7 @@ public class UseFilteringAssertion {
 	 * 検証をパスしたものを抽出
 	 */
 	@Test
-	public void filteredOnAssertions() {
+	void filteredOnAssertions() {
 		Brand stof = new Brand("stof", "Tanita", Gender.MAN);
 		Brand bedsidedrama = new Brand("bedsidedrama", "Tanita", Gender.MAN);
 		Brand sneeuw = new Brand("sneeuw", "Yukiura", Gender.WOMAN);

@@ -1,17 +1,18 @@
 package com.example.assertjsandbox.exception;
 
-import com.example.assertjsandbox.model.Brand;
-import org.assertj.core.api.Assertions;
-import org.junit.Test;
-
 import java.io.IOException;
 
-public class ExceptionAssertion {
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Test;
+
+import com.example.assertjsandbox.model.Brand;
+
+class ExceptionAssertion {
 	/**
 	 * throwされたExceptionクラスとメッセージの検証
 	 */
 	@Test
-	public void assertionExceptionClassAndMessage() {
+	void assertionExceptionClassAndMessage() {
 		Assertions.assertThatThrownBy(() -> {
 			throw new Exception("exception!!!");
 		}).isInstanceOf(Exception.class).hasMessage("exception!!!");
@@ -21,7 +22,7 @@ public class ExceptionAssertion {
 	 * NullPointerExceptionがthrowされることの検証
 	 */
 	@Test
-	public void assertionIllegalArgumentException() {
+	void assertionIllegalArgumentException() {
 		String test = null;
 		Assertions.assertThatNullPointerException()
 				.isThrownBy(test::toUpperCase);
@@ -31,7 +32,7 @@ public class ExceptionAssertion {
 	 * throwされたExceptionクラスとメッセージの検証
 	 */
 	@Test
-	public void assertionExceptionClassAndMessageAndCause() {
+	void assertionExceptionClassAndMessageAndCause() {
 		Assertions.assertThatExceptionOfType(IOException.class)
 				.isThrownBy(() -> {
 					throw new IOException("exception!!!");
@@ -44,7 +45,7 @@ public class ExceptionAssertion {
 	 * ExceptionがThrowされないことの検証
 	 */
 	@Test
-	public void noThrowException() {
+	void noThrowException() {
 		Assertions.assertThatCode(Brand::new).doesNotThrowAnyException();
 	}
 
@@ -52,7 +53,7 @@ public class ExceptionAssertion {
 	 * Throwable変数を用意した場合の検証
 	 */
 	@Test
-	public void throwableVariableAssertion() {
+	void throwableVariableAssertion() {
 		Throwable thrown = Assertions.catchThrowable(() -> {
 			throw new Exception("exception!!!");
 		});

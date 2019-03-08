@@ -1,18 +1,21 @@
 package com.example.assertjsandbox.collection;
 
-import com.example.assertjsandbox.model.*;
+import java.util.Arrays;
+import java.util.List;
+
 import org.assertj.core.api.Assertions;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import java.util.*;
+import com.example.assertjsandbox.model.Brand;
+import com.example.assertjsandbox.model.Gender;
 
-public class StandardAssertion {
+class StandardAssertion {
 
 	/**
 	 * リストであることの検証
 	 */
 	@Test
-	public void asList() {
+	void asList() {
 		Brand stof = new Brand("stof", "Tanita", Gender.MAN);
 		Brand bedsidedrama = new Brand("bedsidedrama", "Tanita", Gender.MAN);
 		Brand sneeuw = new Brand("sneeuw", "Yukiura", Gender.WOMAN);
@@ -27,7 +30,7 @@ public class StandardAssertion {
 	 * 特定のプロパティの検証
 	 */
 	@Test
-	public void listAssertion () {
+	void listAssertion () {
 		Brand stof = new Brand("stof", "Tanita", Gender.MAN);
 		Brand bedsidedrama = new Brand("bedsidedrama", "Tanita", Gender.MAN);
 		Brand ethosens = new Brand("ETHOSENS", "Hashimoto", Gender.MAN);

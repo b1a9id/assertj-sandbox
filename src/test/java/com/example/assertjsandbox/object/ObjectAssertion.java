@@ -1,20 +1,23 @@
 package com.example.assertjsandbox.object;
 
-import com.example.assertjsandbox.model.*;
-import org.assertj.core.api.Assertions;
-import org.junit.Test;
-
 import java.time.LocalDate;
+
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Test;
+
+import com.example.assertjsandbox.model.Brand;
+import com.example.assertjsandbox.model.Gender;
+import com.example.assertjsandbox.model.InitialCharBrand;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ObjectAssertion {
+class ObjectAssertion {
 
 	/**
 	 * timeパッケージの検証
 	 */
 	@Test
-	public void localDateAssert() {
+	void localDateAssert() {
 		LocalDate now = LocalDate.now();
 		LocalDate past = LocalDate.of(2017, 1,1);
 		LocalDate future = LocalDate.of(2099, 12,31);
@@ -26,7 +29,7 @@ public class ObjectAssertion {
 	}
 
 	@Test
-	public void nullAssertion() {
+	void nullAssertion() {
 		String nullStr = null;
 		String notNullStr = "TEST";
 		String blackStr = "";
@@ -41,7 +44,7 @@ public class ObjectAssertion {
 	 * インスタンスのクラスを検証
 	 */
 	@Test
-	public void instanceOf() {
+	void instanceOf() {
 		Brand stof = new Brand("stof", "Tanita", Gender.MAN);
 
 		Assertions.assertThat(stof).isInstanceOf(Brand.class);
@@ -52,7 +55,7 @@ public class ObjectAssertion {
 	 * 同じインスタンスであるかの検証
 	 */
 	@Test
-	public void sameInstance() {
+	void sameInstance() {
 		Brand stof = new Brand("stof", "Tanita", Gender.MAN);
 		Assertions.assertThat(stof).isSameAs(stof);
 	}
@@ -61,7 +64,7 @@ public class ObjectAssertion {
 	 * 全フィールドの値を検証
 	 */
 	@Test
-	public void allFieldAssertion() {
+	void allFieldAssertion() {
 		Brand stof = new Brand("stof", "Tanita", Gender.MAN);
 		Brand cloneStof = new Brand("stof", "Tanita", Gender.MAN);
 
@@ -75,7 +78,7 @@ public class ObjectAssertion {
 	 * 指定したフィールドの値を検証
 	 */
 	@Test
-	public void specificFieldAssertion() {
+	void specificFieldAssertion() {
 		Brand stof = new Brand("stof", "Tanita", Gender.MAN);
 		Brand ethosens = new Brand("ETHOSENS", "Hashimoto", Gender.MAN);
 		Brand storama = new Brand("storama", "Tanita", Gender.MAN);
@@ -89,7 +92,7 @@ public class ObjectAssertion {
 	 * 指定したフィールドの値を検証
 	 */
 	@Test
-	public void addExtractingFunctionArg() {
+	void addExtractingFunctionArg() {
 		Brand brand = new Brand("STOF", "Tanita", Gender.MAN);
 		assertThat(brand)
 				.extracting(Brand::getName)
@@ -100,7 +103,7 @@ public class ObjectAssertion {
 	 * 指定したフィールド以外の値を検証
 	 */
 	@Test
-	public void ignoreSpecificFieldAssertion() {
+	void ignoreSpecificFieldAssertion() {
 		Brand stof = new Brand("stof", "Tanita", Gender.MAN);
 		Brand ethosens = new Brand("ETHOSENS", "Hashimoto", Gender.MAN);
 		Brand storama = new Brand("storama", "Tanita", Gender.MAN);
@@ -114,7 +117,7 @@ public class ObjectAssertion {
 	 * nullのフィールドは無視して検証
 	 */
 	@Test
-	public void ignoreNullFieldAssertion() {
+	void ignoreNullFieldAssertion() {
 		Brand stof = new Brand("stof", "Tanita", Gender.MAN);
 		Brand storama = new Brand(null, "Tanita", Gender.MAN);
 

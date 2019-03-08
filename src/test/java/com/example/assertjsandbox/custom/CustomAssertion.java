@@ -1,12 +1,14 @@
 package com.example.assertjsandbox.custom;
 
-import com.example.assertjsandbox.model.*;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-public class CustomAssertion {
+import com.example.assertjsandbox.model.Brand;
+import com.example.assertjsandbox.model.Gender;
+
+class CustomAssertion {
 
 	@Test
-	public void brandAssertion() {
+	void brandAssertion() {
 		Brand stof = new Brand("stof", "Tanita", Gender.MAN);
 
 		BrandAssert.assertThat(stof)

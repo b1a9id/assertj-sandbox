@@ -1,19 +1,21 @@
 package com.example.assertjsandbox.optional;
 
-import com.example.assertjsandbox.model.*;
-import org.assertj.core.api.Assertions;
-import org.junit.Test;
-
 import java.util.Optional;
 import java.util.function.Function;
 
-public class OptionalAssertion {
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Test;
+
+import com.example.assertjsandbox.model.Brand;
+import com.example.assertjsandbox.model.Gender;
+
+class OptionalAssertion {
 
 	/**
 	 * 値がemptyかどうかの検証
 	 */
 	@Test
-	public void present() {
+	void present() {
 		// AbstractOptionalAssert#isNotEmptyはAbstractOptionalAssert#isPresentのalias
 		Assertions.assertThat(Optional.of("stof"))
 				.isNotEmpty()
@@ -29,7 +31,7 @@ public class OptionalAssertion {
 	 * 指定した値を含んでいるかどうかの検証
 	 */
 	@Test
-	public void contains() {
+	void contains() {
 		// AbstractOptionalAssert#containsはAbstractOptionalAssert#hasValueのalias
 		Assertions.assertThat(Optional.of("stof"))
 				.hasValue("stof")
@@ -40,7 +42,7 @@ public class OptionalAssertion {
 	 * 値が指定した条件を満たしているかどうかの検証
 	 */
 	@Test
-	public void valueSatisfying() {
+	void valueSatisfying() {
 		Assertions.assertThat(Optional.of(10))
 				.hasValueSatisfying(value -> {
 					Assertions.assertThat(value).isGreaterThan(9);
@@ -52,7 +54,7 @@ public class OptionalAssertion {
 	 * 値が指定したクラスのものかどうかの検証
 	 */
 	@Test
-	public void containsInstanceOf() {
+	void containsInstanceOf() {
 		Assertions.assertThat(Optional.of("stof"))
 				.containsInstanceOf(String.class);
 	}
@@ -61,7 +63,7 @@ public class OptionalAssertion {
 	 * 値が同じインスタンスでことの検証
 	 */
 	@Test
-	public void containsSame() {
+	void containsSame() {
 		Brand stof = new Brand("stof", "Tanita", Gender.MAN);
 		Brand stofCopy = stof;
 
@@ -73,7 +75,7 @@ public class OptionalAssertion {
 	 * オブジェクトの検証
 	 */
 	@Test
-	public void objectAssertion() {
+	void objectAssertion() {
 		Brand stof = new Brand("stof", "Tanita", Gender.MAN);
 		Assertions.assertThat(Optional.of(stof))
 				.hasValueSatisfying(b -> {
@@ -84,7 +86,7 @@ public class OptionalAssertion {
 	}
 
 	@Test
-	public void map() {
+	void map() {
 		Assertions.assertThat(Optional.of("stof"))
 				.contains("stof")
 				.map(String::length)
@@ -92,7 +94,7 @@ public class OptionalAssertion {
 	}
 
 	@Test
-	public void flatMap() {
+	void flatMap() {
 		Function<String, Optional<String>> UPPER_CASE_OPTIONAL_STRING =
 				s -> s == null ? Optional.empty() : Optional.of(s.toUpperCase());
 

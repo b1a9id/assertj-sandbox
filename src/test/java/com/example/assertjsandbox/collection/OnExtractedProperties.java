@@ -1,21 +1,23 @@
 package com.example.assertjsandbox.collection;
 
-import com.example.assertjsandbox.model.*;
-import org.assertj.core.api.Assertions;
-import org.assertj.core.groups.Tuple;
-import org.junit.Test;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class OnExtractedProperties {
+import org.assertj.core.api.Assertions;
+import org.assertj.core.groups.Tuple;
+import org.junit.jupiter.api.Test;
+
+import com.example.assertjsandbox.model.Brand;
+import com.example.assertjsandbox.model.Gender;
+
+class OnExtractedProperties {
 
 	/**
 	 * brandsの中に少なくともsneeuwとethosensは含んでいる
 	 */
 	@Test
-	public void brandsContainsSneeuwAndEthosens() {
+	void brandsContainsSneeuwAndEthosens() {
 		Brand stof = new Brand("stof", "Tanita", Gender.MAN);
 		Brand bedsidedrama = new Brand("bedsidedrama", "Tanita", Gender.MAN);
 		Brand sneeuw = new Brand("sneeuw", "Yukiura", Gender.WOMAN);
@@ -31,7 +33,7 @@ public class OnExtractedProperties {
 	 * brandsの中のnameに少なくともstofとDulcamaraは含んでいる
 	 */
 	@Test
-	public void brandsNamePropertyContainsStofAndDulcamara() {
+	void brandsNamePropertyContainsStofAndDulcamara() {
 		Brand stof = new Brand("stof", "Tanita", Gender.MAN);
 		Brand bedsidedrama = new Brand("bedsidedrama", "Tanita", Gender.MAN);
 		Brand sneeuw = new Brand("sneeuw", "Yukiura", Gender.WOMAN);
@@ -50,7 +52,7 @@ public class OnExtractedProperties {
 	 * brandsのnameプロパティの中に少なくともbedsidedramaを含んでおり、Portailleは含んでいない
 	 */
 	@Test
-	public void brandsNamePropertyContainsBedsidedramaNotContainsPortaille() {
+	void brandsNamePropertyContainsBedsidedramaNotContainsPortaille() {
 		Brand stof = new Brand("stof", "Tanita", Gender.MAN);
 		Brand bedsidedrama = new Brand("bedsidedrama", "Tanita", Gender.MAN);
 		Brand sneeuw = new Brand("sneeuw", "Yukiura", Gender.WOMAN);
@@ -68,7 +70,7 @@ public class OnExtractedProperties {
 	 * brandsの中にnameとgenderが一致するオブジェクトを含んでいる
 	 */
 	@Test
-	public void brandsContainsBrandMatchNameAndGenderProperties() {
+	void brandsContainsBrandMatchNameAndGenderProperties() {
 		Brand stof = new Brand("stof", "Tanita", Gender.MAN);
 		Brand bedsidedrama = new Brand("bedsidedrama", "Tanita", Gender.MAN);
 		Brand sneeuw = new Brand("sneeuw", "Yukiura", Gender.WOMAN);
@@ -84,7 +86,7 @@ public class OnExtractedProperties {
 	}
 
 	@Test
-	public void brandsContainsBrandMatchNameAndGenderPropertiesAndNotContains() {
+	void brandsContainsBrandMatchNameAndGenderPropertiesAndNotContains() {
 		Brand stof = new Brand("stof", "Tanita", Gender.MAN);
 		Brand bedsidedrama = new Brand("bedsidedrama", "Tanita", Gender.MAN);
 		Brand sneeuw = new Brand("sneeuw", "Yukiura", Gender.WOMAN);
@@ -106,7 +108,7 @@ public class OnExtractedProperties {
 	 * Tuple#tupleを使用した複数プロパティの検証
 	 */
 	@Test
-	public void multiPropertiesExtractingForTuple() {
+	void multiPropertiesExtractingForTuple() {
 		Brand stof = new Brand("stof", "Tanita", Gender.MAN);
 		Brand ethosens = new Brand("ETHOSENS", "Hashimoto", Gender.MAN);
 		List<Brand> brands = Arrays.asList(stof, ethosens);
@@ -120,7 +122,7 @@ public class OnExtractedProperties {
 	}
 
 	@Test
-	public void multiPropertiesExtractingForFlatExtracting() {
+	void multiPropertiesExtractingForFlatExtracting() {
 		Brand stof = new Brand("stof", "Tanita", Gender.MAN);
 		Brand ethosens = new Brand("ETHOSENS", "Hashimoto", Gender.MAN);
 		List<Brand> brands = Arrays.asList(stof, ethosens);

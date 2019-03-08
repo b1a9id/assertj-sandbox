@@ -1,24 +1,20 @@
 package com.example.assertjsandbox.basic;
 
-import com.sun.javafx.sg.prism.web.NGWebView;
-import org.assertj.core.api.Condition;
-import org.junit.Test;
-
-import javax.swing.plaf.basic.BasicRadioButtonMenuItemUI;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-import java.sql.Struct;
-import java.util.regex.Pattern;
+
+import org.assertj.core.api.Condition;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class BasicAssertion {
+class BasicAssertion {
 
 	/**
 	 * 空白を含んでいるかの検証
 	 */
 	@Test
-	public void containsWhitespacesToStringAndSequence() {
+	void containsWhitespacesToStringAndSequence() {
 		assertThat(" ").containsWhitespaces();
 		assertThat("a b").containsWhitespaces();
 		assertThat(" c ").containsWhitespaces();
@@ -29,7 +25,7 @@ public class BasicAssertion {
 	 * 空白を含んでいないかの検証
 	 */
 	@Test
-	public void doesNotContainWhitespacesToStringAndSequence() {
+	void doesNotContainWhitespacesToStringAndSequence() {
 		assertThat("a").doesNotContainAnyWhitespaces();
 		assertThat("").doesNotContainAnyWhitespaces();
 		assertThat("ab").doesNotContainAnyWhitespaces();
@@ -41,7 +37,7 @@ public class BasicAssertion {
 	 * InputStreamが指定した値を持っているかの検証
 	 */
 	@Test
-	public void hasContentStringArg() {
+	void hasContentStringArg() {
 		InputStream inputStream = new ByteArrayInputStream("abc".getBytes());
 		assertThat(inputStream)
 				.hasContent("abc");
@@ -51,7 +47,7 @@ public class BasicAssertion {
 	 * {@link String#compareTo(String)} の結果が与えられた値より小さいことの検証
 	 */
 	@Test
-	public void isLessThan() {
+	void isLessThan() {
 		assertThat("abc")
 				.isLessThan("bcd")
 				.isLessThan("b")
@@ -62,7 +58,7 @@ public class BasicAssertion {
 	 * {@link String#compareTo(String)} の結果が与えられた値以下であることの検証
 	 */
 	@Test
-	public void isLessThanOrEqualTo() {
+	void isLessThanOrEqualTo() {
 		assertThat("abc")
 				.isLessThanOrEqualTo("bcd")
 				.isLessThanOrEqualTo("abc")
@@ -74,7 +70,7 @@ public class BasicAssertion {
 	 * {@link String#compareTo(String)} の結果が与えられた値より大きいことの検証
 	 */
 	@Test
-	public void isGreaterThan() {
+	void isGreaterThan() {
 		assertThat("xyz")
 				.isGreaterThan("bcd")
 				.isGreaterThan("xy")
@@ -85,7 +81,7 @@ public class BasicAssertion {
 	 * {@link String#compareTo(String)} の結果が与えられた値以上であるの検証
 	 */
 	@Test
-	public void isGreaterThanOrEqualTo() {
+	void isGreaterThanOrEqualTo() {
 		assertThat("xyz")
 				.isGreaterThanOrEqualTo("abc")
 				.isGreaterThanOrEqualTo("xyz")
@@ -97,7 +93,7 @@ public class BasicAssertion {
 	 * {@link String#compareTo(String)} の結果が与えられた値の間にあること（両端含む）
 	 */
 	@Test
-	public void isBetween() {
+	void isBetween() {
 		assertThat("ab")
 				.isBetween("aa", "ac")
 				.isBetween("ab", "ac")
@@ -110,7 +106,7 @@ public class BasicAssertion {
 	 * {@link String#compareTo(String)} の結果が与えられた値の間にあること（両端含まない）
 	 */
 	@Test
-	public void isStrictlyBetween() {
+	void isStrictlyBetween() {
 		assertThat("ab")
 				.isStrictlyBetween("aa", "ac")
 				.isStrictlyBetween("a", "c");
@@ -120,7 +116,7 @@ public class BasicAssertion {
 	 * Conditionクラスで宣言した検証条件を満たしていることの検証
 	 */
 	@Test
-	public void satisfies() {
+	void satisfies() {
 		Condition<String> brandCondition = new Condition<>(s -> s.startsWith("b"), "brand start");
 		assertThat("bedsidedrama")
 				.satisfies(brandCondition);

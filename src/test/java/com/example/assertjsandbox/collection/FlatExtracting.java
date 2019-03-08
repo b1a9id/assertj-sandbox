@@ -1,19 +1,21 @@
 package com.example.assertjsandbox.collection;
 
-import com.example.assertjsandbox.model.*;
-import org.assertj.core.api.Assertions;
-import org.junit.Test;
-
 import java.util.Arrays;
 import java.util.List;
 
-public class FlatExtracting {
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Test;
+
+import com.example.assertjsandbox.model.Gender;
+import com.example.assertjsandbox.model.InitialCharBrand;
+
+class FlatExtracting {
 
 	/**
 	 * brandsのbrandNameプロパティに「stof」「storama」「prasthana」「protaille」を含んでいる
 	 */
 	@Test
-	public void flatExtracting() {
+	void flatExtracting() {
 		InitialCharBrand stof = new InitialCharBrand("stof", "Tanita", Gender.MAN);
 		InitialCharBrand storama = new InitialCharBrand("storama", "Tanita", Gender.MAN);
 		InitialCharBrand initialSBrand = new InitialCharBrand();
