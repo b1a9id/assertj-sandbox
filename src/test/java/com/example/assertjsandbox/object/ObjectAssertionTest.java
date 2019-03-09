@@ -128,9 +128,25 @@ class ObjectAssertionTest {
 	@Test
 	void nestObjectFieldAssertions() {
 		Address address1 = new Address("東京都", "千代田区千代田");
-		Person person1 = new Person("内立", address1);
+		Person person1 = new Person("内立", 20, address1);
 
 		Address address2 = new Address("東京都", "渋谷区東");
-		Person person2 = new Person("良介", address2);
+		Person person2 = new Person("良介", 20, address2);
+
+		Address address3 = new Address("東京都", null);
+		Person person3 = new Person(null, 20, address3);
+
+		// 指定したフィールドを無視する
+		Assertions.assertThat(person1).usingRecursiveComparison()
+				.ignoringFields("name", "address.following")
+				.isEqualTo(person2);
+		Assertions.assertThat(person1).usingRecursiveComparison()
+				.ignoringFields("name", "address")
+				.isEqualTo(person2);
+
+		// nullのフィールドを無視する
+		Assertions.assertThat(person3).usingRecursiveComparison()
+				.ignoringActualNullFields()
+				.isEqualTo(person1);
 	}
 }
