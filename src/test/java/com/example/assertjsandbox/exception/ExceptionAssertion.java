@@ -1,11 +1,10 @@
 package com.example.assertjsandbox.exception;
 
-import java.io.IOException;
-
+import com.example.assertjsandbox.model.Brand;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import com.example.assertjsandbox.model.Brand;
+import java.io.IOException;
 
 class ExceptionAssertion {
 	/**
@@ -25,7 +24,7 @@ class ExceptionAssertion {
 	void assertionIllegalArgumentException() {
 		String test = null;
 		Assertions.assertThatNullPointerException()
-				.isThrownBy(test::toUpperCase);
+				.isThrownBy(() -> test.toUpperCase());
 	}
 
 	/**
