@@ -1,17 +1,14 @@
 package com.example.assertjsandbox.object;
 
-import java.time.LocalDate;
-
+import com.example.assertjsandbox.model.*;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import com.example.assertjsandbox.model.Brand;
-import com.example.assertjsandbox.model.Gender;
-import com.example.assertjsandbox.model.InitialCharBrand;
+import java.time.LocalDate;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class ObjectAssertion {
+class ObjectAssertionTest {
 
 	/**
 	 * timeパッケージの検証
@@ -123,5 +120,17 @@ class ObjectAssertion {
 
 		// isEqualToIgnoringNullFieldsのstoramaにあるnullであるnameフィールドは無視される
 		Assertions.assertThat(stof).isEqualToIgnoringNullFields(storama);
+	}
+
+	/**
+	 * ネストしたオブジェクトの検証
+	 */
+	@Test
+	void nestObjectFieldAssertions() {
+		Address address1 = new Address("東京都", "千代田区千代田");
+		Person person1 = new Person("内立", address1);
+
+		Address address2 = new Address("東京都", "渋谷区東");
+		Person person2 = new Person("良介", address2);
 	}
 }

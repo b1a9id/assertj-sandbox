@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class BasicAssertion {
+class BasicAssertionTest {
 
 	/**
 	 * 空白を含んでいるかの検証

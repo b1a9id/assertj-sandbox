@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import com.example.assertjsandbox.model.Brand;
 import com.example.assertjsandbox.model.Gender;
 
-class OnExtractedProperties {
+class OnExtractedPropertiesTest {
 
 	/**
 	 * brandsの中に少なくともsneeuwとethosensは含んでいる

@@ -9,7 +9,7 @@ import org.assertj.core.util.Sets;
 import org.junit.jupiter.api.Test;
 
 
-class UsingCondition {
+class UsingConditionTest {
 	static Set<String> favoriteBrands = Sets.newLinkedHashSet("stof", "bedsidedrama", "portaille");
 	Condition<String> favoriteBrandsCondition = new Condition<>(favoriteBrands::contains, "favoriteBrands");
 

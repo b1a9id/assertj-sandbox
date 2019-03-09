@@ -3,7 +3,7 @@ package com.example.assertjsandbox.number;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-class NumberAssertion {
+class NumberAssertionTest {
 
 	/**
 	 * 指定した範囲内の値かの検証

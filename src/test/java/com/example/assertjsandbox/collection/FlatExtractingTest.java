@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import com.example.assertjsandbox.model.Gender;
 import com.example.assertjsandbox.model.InitialCharBrand;
 
-class FlatExtracting {
+class FlatExtractingTest {
 
 	/**
 	 * brandsのbrandNameプロパティに「stof」「storama」「prasthana」「protaille」を含んでいる

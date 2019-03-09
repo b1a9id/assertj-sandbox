@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import com.example.assertjsandbox.model.Brand;
 import com.example.assertjsandbox.model.Gender;
 
-class OptionalAssertion {
+class OptionalAssertionTest {
 
 	/**
 	 * 値がemptyかどうかの検証

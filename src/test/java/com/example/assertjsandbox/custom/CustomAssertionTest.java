@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import com.example.assertjsandbox.model.Brand;
 import com.example.assertjsandbox.model.Gender;
 
-class CustomAssertion {
+class CustomAssertionTest {
 
 	@Test
 	void brandAssertion() {
