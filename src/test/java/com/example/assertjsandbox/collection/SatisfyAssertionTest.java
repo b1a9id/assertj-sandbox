@@ -1,12 +1,11 @@
 package com.example.assertjsandbox.collection;
 
-import java.util.Arrays;
-import java.util.List;
-
-import org.junit.jupiter.api.Test;
-
 import com.example.assertjsandbox.model.Brand;
 import com.example.assertjsandbox.model.Gender;
+import org.junit.jupiter.api.Test;
+
+import java.util.Arrays;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.atIndex;
@@ -29,5 +28,16 @@ class SatisfyAssertionTest {
 							assertThat(brand.getGender()).isEqualTo(Gender.MAN);
 						}, atIndex(1)
 				).noneSatisfy(brand -> assertThat(brand.getName()).isEqualTo("Portaille"));
+	}
+
+	@Test
+	void hasOnlyOneElementSatisfying() {
+		List<Brand> brands = List.of(new Brand("ETHOSENS", "Hashimoto", Gender.MAN));
+		assertThat(brands)
+				.hasOnlyOneElementSatisfying(brand -> {
+					assertThat(brand.getName()).isEqualTo("ETHOSENS");
+					assertThat(brand.getDesigner()).isEqualTo("Hashimoto");
+					assertThat(brand.getGender()).isEqualTo(Gender.MAN);
+				});
 	}
 }
