@@ -2,6 +2,7 @@ package com.example.assertjsandbox.basic;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.net.URL;
 
 import org.assertj.core.api.Assertions;
 import org.assertj.core.api.Condition;
@@ -145,5 +146,17 @@ class BasicAssertionTest {
 		Assertions.assertThat("QXNzZXJ0Sg")
 				.decodedAsBase64()
 				.containsExactly("AssertJ".getBytes());
+	}
+
+	/**
+	 * ドメインとリクエストパラメータのkey-valueが正しいかの検証（順不同）
+	 */
+	@Test
+	void assertIsEqualToWithSortedQueryParameters() throws Exception {
+		URL blog = new URL("https://www.b1a9idps.com?p1=uchitate&p2=ryosuke");
+
+		Assertions.assertThat(blog)
+				.isEqualToWithSortedQueryParameters(new URL("https://www.b1a9idps.com?p1=uchitate&p2=ryosuke"))
+				.isEqualToWithSortedQueryParameters(new URL("https://www.b1a9idps.com?p2=ryosuke&p1=uchitate"));
 	}
 }
