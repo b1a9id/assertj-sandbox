@@ -159,4 +159,14 @@ class BasicAssertionTest {
 				.isEqualToWithSortedQueryParameters(new URL("https://www.b1a9idps.com?p1=uchitate&p2=ryosuke"))
 				.isEqualToWithSortedQueryParameters(new URL("https://www.b1a9idps.com?p2=ryosuke&p1=uchitate"));
 	}
+
+	/**
+	 * InputStreamが持っているバイナリが正しいかの検証
+	 */
+	@Test
+	void assertHasBinaryContent() {
+		InputStream inputStream = new ByteArrayInputStream(new byte[] {1, 2});
+
+		Assertions.assertThat(inputStream).hasBinaryContent(new byte[] {1, 2});
+	}
 }
