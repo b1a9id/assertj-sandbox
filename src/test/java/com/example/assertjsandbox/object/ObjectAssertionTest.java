@@ -1,10 +1,15 @@
 package com.example.assertjsandbox.object;
 
-import com.example.assertjsandbox.model.*;
+import java.time.LocalDate;
+
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDate;
+import com.example.assertjsandbox.model.Address;
+import com.example.assertjsandbox.model.Brand;
+import com.example.assertjsandbox.model.Gender;
+import com.example.assertjsandbox.model.InitialCharBrand;
+import com.example.assertjsandbox.model.Person;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -144,9 +149,13 @@ class ObjectAssertionTest {
 				.ignoringFields("name", "address")
 				.isEqualTo(person2);
 
-		// nullのフィールドを無視する
+		// 実測値でnullのフィールドを無視する
 		Assertions.assertThat(person3).usingRecursiveComparison()
 				.ignoringActualNullFields()
 				.isEqualTo(person1);
+		// 期待値でnullのフィールドを無視する
+		Assertions.assertThat(person1).usingRecursiveComparison()
+				.ignoringExpectedNullFields()
+				.isEqualTo(person3);
 	}
 }

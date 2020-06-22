@@ -2,7 +2,10 @@ package com.example.assertjsandbox.basic;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.net.URL;
+import java.util.List;
 
+import org.assertj.core.api.Assertions;
 import org.assertj.core.api.Condition;
 import org.junit.jupiter.api.Test;
 
@@ -120,5 +123,61 @@ class BasicAssertionTest {
 		Condition<String> brandCondition = new Condition<>(s -> s.startsWith("b"), "brand start");
 		assertThat("bedsidedrama")
 				.satisfies(brandCondition);
+	}
+
+	/**
+	 * 正しくBase64エンコードされた文字列かどうかの検証
+	 */
+	@Test
+	void assertIsBase64() {
+		Assertions.assertThat("QXNzZXJ0Sg==").isBase64();
+		// パディングなし
+		Assertions.assertThat("QXNzZXJ0Sg").isBase64();
+	}
+
+	/**
+	 * Base64でデコードした文字列の検証
+	 */
+	@Test
+	void assertDecodedAsBase64() {
+		Assertions.assertThat("QXNzZXJ0Sg==")
+				.decodedAsBase64()
+				.containsExactly("AssertJ".getBytes());
+		// パディングなし
+		Assertions.assertThat("QXNzZXJ0Sg")
+				.decodedAsBase64()
+				.containsExactly("AssertJ".getBytes());
+	}
+
+	/**
+	 * ドメインとリクエストパラメータのkey-valueが正しいかの検証（順不同）
+	 */
+	@Test
+	void assertIsEqualToWithSortedQueryParameters() throws Exception {
+		URL blog = new URL("https://www.b1a9idps.com?p1=uchitate&p2=ryosuke");
+
+		Assertions.assertThat(blog)
+				.isEqualToWithSortedQueryParameters(new URL("https://www.b1a9idps.com?p1=uchitate&p2=ryosuke"))
+				.isEqualToWithSortedQueryParameters(new URL("https://www.b1a9idps.com?p2=ryosuke&p1=uchitate"));
+	}
+
+	/**
+	 * InputStreamが持っているバイナリが正しいかの検証
+	 */
+	@Test
+	void assertHasBinaryContent() {
+		InputStream inputStream = new ByteArrayInputStream(new byte[] {1, 2});
+
+		Assertions.assertThat(inputStream).hasBinaryContent(new byte[] {1, 2});
+	}
+
+	/**
+	 * List中に1つしか含まれない要素かどうかの検証
+	 */
+	@Test
+	void assertContainsOnlyOnceElementsOf() {
+		Assertions.assertThat(List.of("stof", "bedsidedrama", "ETHOSENS"))
+				.containsOnlyOnceElementsOf(List.of("stof"))
+				.containsOnlyOnceElementsOf(List.of("bedsidedrama", "ETHOSENS"));
 	}
 }
