@@ -1,10 +1,11 @@
 package com.example.assertjsandbox.exception;
 
-import com.example.assertjsandbox.model.Brand;
+import java.io.IOException;
+
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
+import com.example.assertjsandbox.model.Brand;
 
 class ExceptionAssertionTest {
 	/**
@@ -61,4 +62,44 @@ class ExceptionAssertionTest {
 				.isInstanceOf(Exception.class)
 				.hasMessageContaining("exception!!!");
 	}
+
+	/**
+	 * ExceptionのCause and/or Root Causeの検証をする
+	 */
+	@Test
+	void checkingCause() {
+		NullPointerException rootCause = new NullPointerException("root cause message");
+		IllegalArgumentException cause = new IllegalArgumentException("cause message", rootCause);
+		Throwable throwable = new Throwable("top level", cause);
+
+		Assertions.assertThat(throwable)
+				.hasMessage("top level")
+				.getRootCause()
+				.hasMessage("root cause message");
+		Assertions.assertThat(throwable)
+				.hasMessage("top level")
+				.getCause()
+				.hasMessage("cause message");
+	}
+
+	/**
+	 * ExceptionのCause and/or Root Causeの検証をする（assertThatExceptionOfType）
+	 */
+	@Test
+	void checkingCauseWithAssertThatExceptionOfType() {
+		NullPointerException rootCause = new NullPointerException("root cause message");
+		IllegalArgumentException cause = new IllegalArgumentException("cause message", rootCause);
+		RuntimeException runtimeException = new RuntimeException(cause);
+
+		Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
+				.isThrownBy(() -> { throw cause; })
+				.havingCause()
+				.withMessage("root cause message");
+
+		Assertions.assertThatExceptionOfType(RuntimeException.class)
+				.isThrownBy(() -> { throw runtimeException; })
+				.havingRootCause()
+				.withMessage("root cause message");
+	}
+
 }
