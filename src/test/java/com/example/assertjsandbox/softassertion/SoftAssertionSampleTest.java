@@ -25,7 +25,7 @@ class SoftAssertionSampleTest {
 	}
 
 	/**
-	 * SoftAssertions#assertSoftlyを使う。z
+	 * SoftAssertions#assertSoftlyを使う。
 	 * 複数の検証がある場合にテストを止めることなく、全体を検証した後にログを出力する
 	 */
 	@Test
