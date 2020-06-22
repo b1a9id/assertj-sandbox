@@ -132,4 +132,18 @@ class BasicAssertionTest {
 		// パディングなし
 		Assertions.assertThat("QXNzZXJ0Sg").isBase64();
 	}
+
+	/**
+	 * Base64でデコードした文字列の検証
+	 */
+	@Test
+	void assertDecodedAsBase64() {
+		Assertions.assertThat("QXNzZXJ0Sg==")
+				.decodedAsBase64()
+				.containsExactly("AssertJ".getBytes());
+		// パディングなし
+		Assertions.assertThat("QXNzZXJ0Sg")
+				.decodedAsBase64()
+				.containsExactly("AssertJ".getBytes());
+	}
 }
