@@ -3,6 +3,7 @@ package com.example.assertjsandbox.basic;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
+import org.assertj.core.api.Assertions;
 import org.assertj.core.api.Condition;
 import org.junit.jupiter.api.Test;
 
@@ -120,5 +121,15 @@ class BasicAssertionTest {
 		Condition<String> brandCondition = new Condition<>(s -> s.startsWith("b"), "brand start");
 		assertThat("bedsidedrama")
 				.satisfies(brandCondition);
+	}
+
+	/**
+	 * 正しくBase64エンコードされた文字列かどうかの検証
+	 */
+	@Test
+	void assertIsBase64() {
+		Assertions.assertThat("QXNzZXJ0Sg==").isBase64();
+		// パディングなし
+		Assertions.assertThat("QXNzZXJ0Sg").isBase64();
 	}
 }
