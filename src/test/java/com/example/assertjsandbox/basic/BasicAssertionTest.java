@@ -3,6 +3,7 @@ package com.example.assertjsandbox.basic;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.List;
 
 import org.assertj.core.api.Assertions;
 import org.assertj.core.api.Condition;
@@ -168,5 +169,15 @@ class BasicAssertionTest {
 		InputStream inputStream = new ByteArrayInputStream(new byte[] {1, 2});
 
 		Assertions.assertThat(inputStream).hasBinaryContent(new byte[] {1, 2});
+	}
+
+	/**
+	 * List中に1つしか含まれない要素かどうかの検証
+	 */
+	@Test
+	void assertContainsOnlyOnceElementsOf() {
+		Assertions.assertThat(List.of("stof", "bedsidedrama", "ETHOSENS"))
+				.containsOnlyOnceElementsOf(List.of("stof"))
+				.containsOnlyOnceElementsOf(List.of("bedsidedrama", "ETHOSENS"));
 	}
 }
