@@ -3,11 +3,15 @@ package com.example.assertjsandbox.collection;
 import com.example.assertjsandbox.model.Brand;
 import com.example.assertjsandbox.model.Gender;
 import org.assertj.core.api.Assertions;
+import org.assertj.core.api.InstanceOfAssertFactory;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+
+import static org.assertj.core.api.Assertions.as;
+import static org.assertj.core.api.InstanceOfAssertFactories.STRING;
 
 class StandardAssertionTest {
 
@@ -92,5 +96,22 @@ class StandardAssertionTest {
 	void containsOnlyKeysAssertion() {
 		Map<Integer, String> map1 = Map.of(1, "TEST1", 2, "TEST2");
 		Assertions.assertThat(map1).containsOnlyKeys(List.of(1, 2));
+	}
+
+	/**
+	 * Iterableが１要素かどうかの検証
+	 */
+	@Test
+	void singleElement() {
+		List<String> brandNames = List.of("stof");
+		Assertions.assertThat(brandNames).singleElement().isEqualTo("stof");
+		Assertions.assertThat(brandNames).singleElement(as(STRING)).startsWith("st");
+
+		List<Brand> brands =
+				List.of(new Brand("stof", "Tanita", Gender.MAN));
+		Assertions.assertThat(brands)
+				.singleElement(as(new InstanceOfAssertFactory<>(Brand.class, Assertions::assertThat)))
+				.extracting(Brand::getName, Brand::getDesigner, Brand::getGender)
+				.containsExactly("stof", "Tanita", Gender.MAN);
 	}
 }
