@@ -30,4 +30,16 @@ class NumberAssertionTest {
 				.isOne()
 				.isNotNegative();
 	}
+
+	/**
+	 * 奇数か偶数かの検証
+	 */
+	@Test
+	void evenOrOdd() {
+		Assertions.assertThat(12).isEven();
+		Assertions.assertThat(-46).isEven();
+
+		Assertions.assertThat(3).isOdd();
+		Assertions.assertThat(-17).isOdd();
+	}
 }

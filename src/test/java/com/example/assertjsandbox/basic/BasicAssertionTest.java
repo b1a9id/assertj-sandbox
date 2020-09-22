@@ -1,13 +1,13 @@
 package com.example.assertjsandbox.basic;
 
+import org.assertj.core.api.Assertions;
+import org.assertj.core.api.Condition;
+import org.junit.jupiter.api.Test;
+
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.List;
-
-import org.assertj.core.api.Assertions;
-import org.assertj.core.api.Condition;
-import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -180,4 +180,24 @@ class BasicAssertionTest {
 				.containsOnlyOnceElementsOf(List.of("stof"))
 				.containsOnlyOnceElementsOf(List.of("bedsidedrama", "ETHOSENS"));
 	}
+
+	/**
+	 * InputStreamが空かどうかの検証
+	 */
+	@Test
+	void inputStreamEmptyOrNotEmpty() {
+		Assertions.assertThat(new ByteArrayInputStream(new byte[] {})).isEmpty();
+		Assertions.assertThat(new ByteArrayInputStream(new byte[] {0xa})).isNotEmpty();
+	}
+
+	/**
+	 * 指定した値を含んでいるかどうかの検証
+	 */
+	@Test
+	void doesNotContainIgnoringCase() {
+		Assertions.assertThat("stof")
+				.containsIgnoringCase("st")
+				.doesNotContainIgnoringCase("ETHOSENS", "bedside");
+	}
+
 }

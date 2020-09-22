@@ -1,14 +1,13 @@
 package com.example.assertjsandbox.collection;
 
-import java.util.Arrays;
-import java.util.List;
-
+import com.example.assertjsandbox.model.Brand;
+import com.example.assertjsandbox.model.Gender;
 import org.assertj.core.api.Assertions;
 import org.assertj.core.api.Condition;
 import org.junit.jupiter.api.Test;
 
-import com.example.assertjsandbox.model.Brand;
-import com.example.assertjsandbox.model.Gender;
+import java.util.Arrays;
+import java.util.List;
 
 class UseFilteringAssertionTest {
 
