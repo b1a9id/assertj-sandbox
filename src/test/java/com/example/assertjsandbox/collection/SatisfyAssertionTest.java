@@ -34,10 +34,8 @@ class SatisfyAssertionTest {
 	void hasOnlyOneElementSatisfying() {
 		List<Brand> brands = List.of(new Brand("ETHOSENS", "Hashimoto", Gender.MAN));
 		assertThat(brands)
-				.hasOnlyOneElementSatisfying(brand -> {
-					assertThat(brand.getName()).isEqualTo("ETHOSENS");
-					assertThat(brand.getDesigner()).isEqualTo("Hashimoto");
-					assertThat(brand.getGender()).isEqualTo(Gender.MAN);
-				});
+				.singleElement()
+				.extracting(Brand::getName, Brand::getDesigner, Brand::getGender)
+				.containsExactly("ETHOSENS", "Hashimoto", Gender.MAN);
 	}
 }

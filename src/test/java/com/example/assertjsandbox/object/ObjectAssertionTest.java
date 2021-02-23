@@ -1,15 +1,10 @@
 package com.example.assertjsandbox.object;
 
-import java.time.LocalDate;
-
+import com.example.assertjsandbox.model.*;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import com.example.assertjsandbox.model.Address;
-import com.example.assertjsandbox.model.Brand;
-import com.example.assertjsandbox.model.Gender;
-import com.example.assertjsandbox.model.InitialCharBrand;
-import com.example.assertjsandbox.model.Person;
+import java.time.LocalDate;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -73,21 +68,8 @@ class ObjectAssertionTest {
 		// オブジェクトを比較すると異なる
 		Assertions.assertThat(stof)
 				.isNotEqualTo(cloneStof)
-				.isEqualToComparingFieldByField(cloneStof);
-	}
-
-	/**
-	 * 指定したフィールドの値を検証
-	 */
-	@Test
-	void specificFieldAssertion() {
-		Brand stof = new Brand("stof", "Tanita", Gender.MAN);
-		Brand ethosens = new Brand("ETHOSENS", "Hashimoto", Gender.MAN);
-		Brand storama = new Brand("storama", "Tanita", Gender.MAN);
-
-		Assertions.assertThat(stof)
-				.isEqualToComparingOnlyGivenFields(ethosens, "gender")
-				.isEqualToComparingOnlyGivenFields(storama, "designer", "gender");
+				.usingRecursiveComparison()
+				.isEqualTo(cloneStof);
 	}
 
 	/**
@@ -111,8 +93,11 @@ class ObjectAssertionTest {
 		Brand storama = new Brand("storama", "Tanita", Gender.MAN);
 
 		Assertions.assertThat(stof)
-				.isEqualToIgnoringGivenFields(ethosens, "name", "designer")
-				.isEqualToIgnoringGivenFields(storama, "name");
+				.usingRecursiveComparison()
+				.ignoringFields("name", "designer")
+				.isEqualTo(ethosens)
+				.ignoringFields("name")
+				.isEqualTo(storama);
 	}
 
 	/**
@@ -124,7 +109,10 @@ class ObjectAssertionTest {
 		Brand storama = new Brand(null, "Tanita", Gender.MAN);
 
 		// isEqualToIgnoringNullFieldsのstoramaにあるnullであるnameフィールドは無視される
-		Assertions.assertThat(stof).isEqualToIgnoringNullFields(storama);
+		Assertions.assertThat(stof)
+				.usingRecursiveComparison()
+				.ignoringExpectedNullFields()
+				.isEqualTo(storama);
 	}
 
 	/**
