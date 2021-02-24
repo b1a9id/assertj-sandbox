@@ -146,4 +146,14 @@ class ObjectAssertionTest {
 				.ignoringExpectedNullFields()
 				.isEqualTo(person3);
 	}
+
+	/**
+	 * オブジェクトが指定したフィールドのみ持つことの検証（過不足はfailed）
+	 */
+	@Test
+	void hasOnlyFields() {
+		Brand stof = new Brand("stof", "Tanita", Gender.MAN);
+
+		Assertions.assertThat(stof).hasOnlyFields("name", "designer", "gender");
+	}
 }

@@ -1,5 +1,7 @@
 package com.example.assertjsandbox.basic;
 
+import com.example.assertjsandbox.model.Brand;
+import com.example.assertjsandbox.model.Gender;
 import org.assertj.core.api.Assertions;
 import org.assertj.core.api.Condition;
 import org.junit.jupiter.api.Test;
@@ -7,6 +9,8 @@ import org.junit.jupiter.api.Test;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.net.URL;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -198,6 +202,48 @@ class BasicAssertionTest {
 		Assertions.assertThat("stof")
 				.containsIgnoringCase("st")
 				.doesNotContainIgnoringCase("ETHOSENS", "bedside");
+	}
+
+	@Test
+	void isEqualToNormalizingUnicode() {
+		// Ä = \u00C4 - Ä = \u0041\u0308
+		assertThat("Ä").isEqualToNormalizingUnicode("Ä");
+		assertThat("\u00C4").isEqualToNormalizingUnicode("\u0041\u0308");
+	}
+
+	/**
+	 * ハッシュコードが異なることの検証
+	 */
+	@Test
+	void doesNotHaveSameHashCodeAs() {
+		Assertions.assertThat(42L).doesNotHaveSameHashCodeAs(250L);
+		Assertions.assertThat("stof").doesNotHaveSameHashCodeAs("bedsidedrama");
+	}
+
+	/**
+	 * Object#toString()の検証
+	 */
+	@Test
+	void doesNotHaveToString() {
+		Brand stof = new Brand("stof", "Tanita", Gender.MAN);
+
+		// これまで
+		Assertions.assertThat(stof.toString()).isNotEqualTo("TEST");
+		// これから
+		Assertions.assertThat(stof).doesNotHaveToString("TEST");
+		Assertions.assertThat(stof).hasToString(stof.toString());
+	}
+
+	/**
+	 * 指定したパスにあるファイルが空かどうかの検証
+	 */
+	@Test
+	void isEmptyFile() {
+		Path noEmpty = Paths.get("src/test/resources/txt/has-content.txt");
+		Assertions.assertThat(noEmpty).isNotEmptyFile();
+
+		Path empty = Paths.get("src/test/resources/txt/no-content.txt");
+		Assertions.assertThat(empty).isEmptyFile();
 	}
 
 }
