@@ -15,6 +15,6 @@ jobs:
       with:
         distribution: temurin
         java-version: 17
-        cache: gradle
+        cache: maven
     - name: Execute test
       run: mvn clean test
