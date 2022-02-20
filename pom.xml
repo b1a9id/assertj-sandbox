@@ -15,9 +15,8 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<java.version>15</java.version>
-		<junit.platform.version>1.7.0</junit.platform.version>
-		<junit.jupiter.version>5.7.0</junit.jupiter.version>
+		<java.version>17</java.version>
+		<junit.jupiter.version>5.8.2</junit.jupiter.version>
 		<assertj.version>3.19.0</assertj.version>
 	</properties>
 
@@ -59,7 +58,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.8.1</version>
+				<version>3.10.0</version>
 				<configuration>
 					<source>${java.version}</source>
 					<target>${java.version}</target>
