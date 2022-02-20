@@ -6,6 +6,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import com.example.assertjsandbox.model.Brand;
+import com.example.assertjsandbox.model.Gender;
 
 class ExceptionAssertionTest {
 	/**
@@ -46,7 +47,7 @@ class ExceptionAssertionTest {
 	 */
 	@Test
 	void noThrowException() {
-		Assertions.assertThatCode(Brand::new).doesNotThrowAnyException();
+		Assertions.assertThatCode(() -> new Brand("ETHOSENS", "Hashimoto", Gender.MAN)).doesNotThrowAnyException();
 	}
 
 	/**

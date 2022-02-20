@@ -17,9 +17,9 @@ class SoftAssertionSampleTest {
 		Brand stof = new Brand("stof", "Tanita", Gender.MAN);
 		// 直接的にassertThatを使わずにSoftAssertionsを使う
 		SoftAssertions softAssertions = new SoftAssertions();
-		softAssertions.assertThat(stof.getName()).as("Brand").isEqualTo("stof");
-		softAssertions.assertThat(stof.getDesigner()).as("Desinger").isEqualTo("Tanita");
-		softAssertions.assertThat(stof.getGender()).as("Gender").isEqualTo(Gender.MAN);
+		softAssertions.assertThat(stof.name()).as("Brand").isEqualTo("stof");
+		softAssertions.assertThat(stof.designer()).as("Desinger").isEqualTo("Tanita");
+		softAssertions.assertThat(stof.gender()).as("Gender").isEqualTo(Gender.MAN);
 		// SoftAssertionsの全体の検証をするメソッドを呼ぶ
 		softAssertions.assertAll();
 	}
@@ -32,9 +32,9 @@ class SoftAssertionSampleTest {
 	void notMatchDesignerForAssertSoftlyMethod() {
 		Brand stof = new Brand("stof", "Tanita", Gender.MAN);
 		SoftAssertions.assertSoftly(softAssertions -> {
-			softAssertions.assertThat(stof.getName()).as("Brand").isEqualTo("stof");
-			softAssertions.assertThat(stof.getDesigner()).as("Desinger").isEqualTo("Tanita");
-			softAssertions.assertThat(stof.getGender()).as("Gender").isEqualTo(Gender.MAN);
+			softAssertions.assertThat(stof.name()).as("Brand").isEqualTo("stof");
+			softAssertions.assertThat(stof.designer()).as("Desinger").isEqualTo("Tanita");
+			softAssertions.assertThat(stof.gender()).as("Gender").isEqualTo(Gender.MAN);
 			// assertSoftlyメソッドによりassertAllを実行されるので、呼ぶ必要はない。
 		});
 	}

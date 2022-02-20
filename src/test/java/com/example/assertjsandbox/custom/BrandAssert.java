@@ -1,9 +1,11 @@
 package com.example.assertjsandbox.custom;
 
-import com.example.assertjsandbox.model.*;
+import java.util.Objects;
+
 import org.assertj.core.api.AbstractAssert;
 
-import java.util.Objects;
+import com.example.assertjsandbox.model.Brand;
+import com.example.assertjsandbox.model.Gender;
 
 public class BrandAssert extends AbstractAssert<BrandAssert, Brand>{
 
@@ -22,8 +24,8 @@ public class BrandAssert extends AbstractAssert<BrandAssert, Brand>{
 
 	public BrandAssert hasName(String name) {
 		isNotNull();
-		if (!Objects.equals(actual.getName(), name)) {
-			failWithMessage("Expected character's name to be <%s> but was <%s>", name, actual.getName());
+		if (!Objects.equals(actual.name(), name)) {
+			failWithMessage("Expected character's name to be <%s> but was <%s>", name, actual.name());
 		}
 
 		return this;
@@ -32,8 +34,8 @@ public class BrandAssert extends AbstractAssert<BrandAssert, Brand>{
 	public BrandAssert hasGender(Gender gender) {
 		isNotNull();
 
-		if (actual.getGender() != gender) {
-			failWithMessage("Expected character's gender to be <%s> but was <%s>", gender, actual.getGender());
+		if (actual.gender() != gender) {
+			failWithMessage("Expected character's gender to be <%s> but was <%s>", gender, actual.gender());
 		}
 
 		return this;

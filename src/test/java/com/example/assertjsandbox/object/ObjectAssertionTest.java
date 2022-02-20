@@ -1,10 +1,15 @@
 package com.example.assertjsandbox.object;
 
-import com.example.assertjsandbox.model.*;
+import java.time.LocalDate;
+
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDate;
+import com.example.assertjsandbox.model.Address;
+import com.example.assertjsandbox.model.Brand;
+import com.example.assertjsandbox.model.Gender;
+import com.example.assertjsandbox.model.InitialCharBrand;
+import com.example.assertjsandbox.model.Person;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -67,7 +72,6 @@ class ObjectAssertionTest {
 
 		// オブジェクトを比較すると異なる
 		Assertions.assertThat(stof)
-				.isNotEqualTo(cloneStof)
 				.usingRecursiveComparison()
 				.isEqualTo(cloneStof);
 	}
@@ -79,7 +83,7 @@ class ObjectAssertionTest {
 	void addExtractingFunctionArg() {
 		Brand brand = new Brand("STOF", "Tanita", Gender.MAN);
 		assertThat(brand)
-				.extracting(Brand::getName)
+				.extracting(Brand::name)
 				.isEqualTo("STOF");
 	}
 

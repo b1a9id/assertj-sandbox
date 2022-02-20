@@ -1,13 +1,14 @@
 package com.example.assertjsandbox.collection;
 
-import com.example.assertjsandbox.model.Brand;
-import com.example.assertjsandbox.model.Gender;
+import java.util.Arrays;
+import java.util.List;
+
 import org.assertj.core.api.Assertions;
 import org.assertj.core.api.Condition;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-import java.util.List;
+import com.example.assertjsandbox.model.Brand;
+import com.example.assertjsandbox.model.Gender;
 
 class UseFilteringAssertionTest {
 
@@ -24,7 +25,7 @@ class UseFilteringAssertionTest {
 		List<Brand> brands = Arrays.asList(stof, bedsidedrama, sneeuw, ethosens, dulcamara);
 
 		Assertions.assertThat(brands)
-				.filteredOn(brand -> brand.getName().contains("e"))
+				.filteredOn(brand -> brand.name().contains("e"))
 				.containsOnly(bedsidedrama, sneeuw);
 	}
 
@@ -109,7 +110,7 @@ class UseFilteringAssertionTest {
 		List<Brand> brands = Arrays.asList(stof, bedsidedrama, sneeuw, ethosens, dulcamara);
 
 		Assertions.assertThat(brands)
-				.filteredOn(brand -> brand.getName().contains("e"))
+				.filteredOn(brand -> brand.name().contains("e"))
 				.filteredOn("gender", Gender.MAN)
 				.containsOnly(bedsidedrama);
 	}
@@ -122,7 +123,7 @@ class UseFilteringAssertionTest {
 		Condition<Brand> includeEBrands = new Condition<Brand>() {
 			@Override
 			public boolean matches(Brand brand) {
-				return brand.getName().contains("e");
+				return brand.name().contains("e");
 			}
 		};
 
@@ -151,7 +152,7 @@ class UseFilteringAssertionTest {
 		List<Brand> brands = Arrays.asList(stof, bedsidedrama, sneeuw, ethosens, dulcamara);
 
 		Assertions.assertThat(brands)
-				.filteredOnAssertions(b -> Assertions.assertThat(b.getName()).startsWith("s"))
+				.filteredOnAssertions(b -> Assertions.assertThat(b.name()).startsWith("s"))
 				.containsExactly(stof, sneeuw);
 	}
 }

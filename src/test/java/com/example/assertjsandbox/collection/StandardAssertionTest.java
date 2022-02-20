@@ -1,14 +1,15 @@
 package com.example.assertjsandbox.collection;
 
-import com.example.assertjsandbox.model.Brand;
-import com.example.assertjsandbox.model.Gender;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+
 import org.assertj.core.api.Assertions;
 import org.assertj.core.api.InstanceOfAssertFactory;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import com.example.assertjsandbox.model.Brand;
+import com.example.assertjsandbox.model.Gender;
 
 import static org.assertj.core.api.Assertions.as;
 import static org.assertj.core.api.InstanceOfAssertFactories.STRING;
@@ -41,7 +42,7 @@ class StandardAssertionTest {
 		List<Brand> brands = Arrays.asList(stof, bedsidedrama, ethosens);
 
 		Assertions.assertThat(brands)
-				.extracting(Brand::getName)
+				.extracting(Brand::name)
 				.containsExactly("stof", "bedsidedrama", "ETHOSENS");
 	}
 
@@ -111,7 +112,7 @@ class StandardAssertionTest {
 				List.of(new Brand("stof", "Tanita", Gender.MAN));
 		Assertions.assertThat(brands)
 				.singleElement(as(new InstanceOfAssertFactory<>(Brand.class, Assertions::assertThat)))
-				.extracting(Brand::getName, Brand::getDesigner, Brand::getGender)
+				.extracting(Brand::name, Brand::designer, Brand::gender)
 				.containsExactly("stof", "Tanita", Gender.MAN);
 	}
 }
