@@ -79,9 +79,9 @@ class OptionalAssertionTest {
 		Brand stof = new Brand("stof", "Tanita", Gender.MAN);
 		Assertions.assertThat(Optional.of(stof))
 				.hasValueSatisfying(b -> {
-					Assertions.assertThat(b.getName()).isEqualTo("stof");
-					Assertions.assertThat(b.getDesigner()).isEqualTo("Tanita");
-					Assertions.assertThat(b.getGender()).isEqualTo(Gender.MAN);
+					Assertions.assertThat(b.name()).isEqualTo("stof");
+					Assertions.assertThat(b.designer()).isEqualTo("Tanita");
+					Assertions.assertThat(b.gender()).isEqualTo(Gender.MAN);
 				});
 	}
 

@@ -41,7 +41,7 @@ class OnExtractedPropertiesTest {
 		Brand dulcamara = new Brand("Dulcamara", "Yoda", Gender.WOMAN);
 		List<Brand> brands = Arrays.asList(stof, bedsidedrama, sneeuw, ethosens, dulcamara);
 		List<String> brandNames = brands.stream()
-				.map(Brand::getName)
+				.map(Brand::name)
 				.collect(Collectors.toList());
 
 		Assertions.assertThat(brandNames)
@@ -114,7 +114,7 @@ class OnExtractedPropertiesTest {
 		List<Brand> brands = Arrays.asList(stof, ethosens);
 
 		Assertions.assertThat(brands)
-				.extracting(Brand::getName, Brand::getGender)
+				.extracting(Brand::name, Brand::gender)
 				.containsExactly(
 						Tuple.tuple("stof", Gender.MAN),
 						Tuple.tuple("ETHOSENS", Gender.MAN)
@@ -128,7 +128,7 @@ class OnExtractedPropertiesTest {
 		List<Brand> brands = Arrays.asList(stof, ethosens);
 
 		Assertions.assertThat(brands)
-				.flatExtracting(Brand::getName, Brand::getGender)
+				.flatExtracting(Brand::name, Brand::gender)
 				.containsExactly("stof", Gender.MAN, "ETHOSENS", Gender.MAN);
 	}
 }

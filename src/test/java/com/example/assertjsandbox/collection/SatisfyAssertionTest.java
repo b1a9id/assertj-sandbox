@@ -1,11 +1,12 @@
 package com.example.assertjsandbox.collection;
 
-import com.example.assertjsandbox.model.Brand;
-import com.example.assertjsandbox.model.Gender;
-import org.junit.jupiter.api.Test;
-
 import java.util.Arrays;
 import java.util.List;
+
+import org.junit.jupiter.api.Test;
+
+import com.example.assertjsandbox.model.Brand;
+import com.example.assertjsandbox.model.Gender;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.atIndex;
@@ -23,11 +24,11 @@ class SatisfyAssertionTest {
 
 		assertThat(brands)
 				.satisfies(brand -> {
-							assertThat(brand.getName()).isEqualTo("bedsidedrama");
-							assertThat(brand.getDesigner()).isEqualTo("Tanita");
-							assertThat(brand.getGender()).isEqualTo(Gender.MAN);
+							assertThat(brand.name()).isEqualTo("bedsidedrama");
+							assertThat(brand.designer()).isEqualTo("Tanita");
+							assertThat(brand.gender()).isEqualTo(Gender.MAN);
 						}, atIndex(1)
-				).noneSatisfy(brand -> assertThat(brand.getName()).isEqualTo("Portaille"));
+				).noneSatisfy(brand -> assertThat(brand.name()).isEqualTo("Portaille"));
 	}
 
 	@Test
@@ -35,7 +36,7 @@ class SatisfyAssertionTest {
 		List<Brand> brands = List.of(new Brand("ETHOSENS", "Hashimoto", Gender.MAN));
 		assertThat(brands)
 				.singleElement()
-				.extracting(Brand::getName, Brand::getDesigner, Brand::getGender)
+				.extracting(Brand::name, Brand::designer, Brand::gender)
 				.containsExactly("ETHOSENS", "Hashimoto", Gender.MAN);
 	}
 }

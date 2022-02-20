@@ -1,14 +1,15 @@
 package com.example.assertjsandbox.iterable;
 
-import com.example.assertjsandbox.model.Brand;
-import com.example.assertjsandbox.model.Gender;
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.Test;
-
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.List;
+
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Test;
+
+import com.example.assertjsandbox.model.Brand;
+import com.example.assertjsandbox.model.Gender;
 
 import static org.assertj.core.util.DateUtil.parseDatetimeWithMs;
 
@@ -26,10 +27,10 @@ class IterableAssertionTest {
         Assertions.assertThat(brandIterable)
                 .satisfiesExactly(
                         brand -> Assertions.assertThat(brand)
-                                .extracting(Brand::getName, Brand::getDesigner, Brand::getGender)
+                                .extracting(Brand::name, Brand::designer, Brand::gender)
                                 .containsExactly("stof", "Tanita", Gender.MAN),
                         brand -> Assertions.assertThat(brand)
-                                .extracting(Brand::getName, Brand::getDesigner, Brand::getGender)
+                                .extracting(Brand::name, Brand::designer, Brand::gender)
                                 .containsExactly("bedsidedrama", "Tanita", Gender.MAN)
                 );
 
@@ -37,10 +38,10 @@ class IterableAssertionTest {
         Assertions.assertThat(brandArray)
                 .satisfiesExactly(
                         brand -> Assertions.assertThat(brand)
-                                .extracting(Brand::getName, Brand::getDesigner, Brand::getGender)
+                                .extracting(Brand::name, Brand::designer, Brand::gender)
                                 .containsExactly("stof", "Tanita", Gender.MAN),
                         brand -> Assertions.assertThat(brand)
-                                .extracting(Brand::getName, Brand::getDesigner, Brand::getGender)
+                                .extracting(Brand::name, Brand::designer, Brand::gender)
                                 .containsExactly("bedsidedrama", "Tanita", Gender.MAN)
                 );
     }
