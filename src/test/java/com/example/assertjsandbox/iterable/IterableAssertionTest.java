@@ -79,4 +79,19 @@ class IterableAssertionTest {
                 .isInSameYearAs(Instant.parse("2001-01-01T00:00:00.00Z"))
                 .isNotIn(dateTimeWithMs.toInstant().minusMillis(10), dateTimeWithMs.toInstant().plusMillis(10));
     }
+
+    /**
+     * Iterableの指定した要素番号の要素の検証
+     */
+    @Test
+    void elements() {
+        var stof = new Brand("stof", "Tanita", Gender.MAN);
+        var bedsidedrama = new Brand("bedsidedrama", "Tanita", Gender.MAN);
+        Iterable<Brand> brands = List.of(stof, bedsidedrama);
+
+        Assertions.assertThat(brands)
+                .elements(1)
+                .hasSize(1)
+                .containsExactly(bedsidedrama);
+    }
 }
