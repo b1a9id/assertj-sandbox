@@ -56,4 +56,13 @@ class NumberAssertionTest {
 		Assertions.assertThat(Float.NEGATIVE_INFINITY).isNotFinite();
 		Assertions.assertThat(Float.NaN).isNotFinite();
 	}
+
+	/**
+	 * float と doubleの値が正の無限大でも負の無限大でもないことを検証
+	 */
+	@Test
+	void isNotInfinite() {
+		Assertions.assertThat(1.0).isNotInfinite();
+		Assertions.assertThat(Double.NaN).isNotInfinite();
+	}
 }
