@@ -8,8 +8,10 @@ import org.assertj.core.api.Assertions;
 import org.assertj.core.api.InstanceOfAssertFactory;
 import org.junit.jupiter.api.Test;
 
+import com.example.assertjsandbox.model.Address;
 import com.example.assertjsandbox.model.Brand;
 import com.example.assertjsandbox.model.Gender;
+import com.example.assertjsandbox.model.Person;
 
 import static org.assertj.core.api.Assertions.as;
 import static org.assertj.core.api.InstanceOfAssertFactories.STRING;
@@ -114,5 +116,20 @@ class StandardAssertionTest {
 				.singleElement(as(new InstanceOfAssertFactory<>(Brand.class, Assertions::assertThat)))
 				.extracting(Brand::name, Brand::designer, Brand::gender)
 				.containsExactly("stof", "Tanita", Gender.MAN);
+	}
+
+	/**
+	 * Assertions#ssertWithを利用すると、検証のために何度もインスタンスを取得せずに済む
+	 */
+	@Test
+	void assertWith() {
+		Address address1 = new Address("東京都", "千代田区千代田");
+		Person person1 = new Person("内立", 20, address1);
+		var personList = List.of(person1);
+
+		Assertions.assertWith(personList.get(0).address(), v -> {
+			Assertions.assertThat(v.prefecture()).isEqualTo("東京都");
+			Assertions.assertThat(v.following()).isEqualTo("千代田区千代田");
+		});
 	}
 }

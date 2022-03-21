@@ -42,4 +42,27 @@ class NumberAssertionTest {
 		Assertions.assertThat(3).isOdd();
 		Assertions.assertThat(-17).isOdd();
 	}
+
+	/**
+	 * float と doubleの値が有限でないことの検証
+	 */
+	@Test
+	void isNotFinite() {
+		Assertions.assertThat(Double.POSITIVE_INFINITY).isNotFinite();
+		Assertions.assertThat(Double.NEGATIVE_INFINITY).isNotFinite();
+		Assertions.assertThat(Double.NaN).isNotFinite();
+
+		Assertions.assertThat(Float.POSITIVE_INFINITY).isNotFinite();
+		Assertions.assertThat(Float.NEGATIVE_INFINITY).isNotFinite();
+		Assertions.assertThat(Float.NaN).isNotFinite();
+	}
+
+	/**
+	 * float と doubleの値が正の無限大でも負の無限大でもないことを検証
+	 */
+	@Test
+	void isNotInfinite() {
+		Assertions.assertThat(1.0).isNotInfinite();
+		Assertions.assertThat(Double.NaN).isNotInfinite();
+	}
 }

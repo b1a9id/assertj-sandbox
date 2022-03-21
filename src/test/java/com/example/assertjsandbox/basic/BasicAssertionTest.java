@@ -1,17 +1,22 @@
 package com.example.assertjsandbox.basic;
 
-import com.example.assertjsandbox.model.Brand;
-import com.example.assertjsandbox.model.Gender;
-import org.assertj.core.api.Assertions;
-import org.assertj.core.api.Condition;
-import org.junit.jupiter.api.Test;
-
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Optional;
+
+import org.assertj.core.api.Assertions;
+import org.assertj.core.api.Condition;
+import org.assertj.core.condition.MappedCondition;
+import org.assertj.core.condition.VerboseCondition;
+import org.junit.jupiter.api.Test;
+
+import com.example.assertjsandbox.model.Brand;
+import com.example.assertjsandbox.model.Gender;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -244,6 +249,57 @@ class BasicAssertionTest {
 
 		Path empty = Paths.get("src/test/resources/txt/no-content.txt");
 		Assertions.assertThat(empty).isEmptyFile();
+	}
+
+	/**
+	 * 空白を無視して文字列を含んでいるかの検証
+	 */
+	@Test
+	void containsIgnoringWhitespaces() {
+		Assertions.assertThat("My favorite brand is ETHOSENS")
+				.containsIgnoringWhitespaces("rand")
+				.containsIgnoringWhitespaces("favorite", "ETHOSENS")
+				.containsIgnoringWhitespaces("favoritebrand")
+				.containsIgnoringWhitespaces("isETHOSEN S");
+	}
+
+	/**
+	 * AbstractInputStreamAssertでStringとしての検証
+	 */
+	@Test
+	void inputStreamToString() {
+		var inputStream = new ByteArrayInputStream("abc".getBytes());
+
+		Assertions.assertThat(inputStream)
+				.asString(StandardCharsets.UTF_8)
+				.startsWith("a")
+				.endsWith("c");
+	}
+
+	/**
+	 * マッピングの処理結果をConditionで検証
+	 */
+	@Test
+	void mappedCondition() {
+		Condition<String> startWithE = new Condition<>(s -> s.startsWith("E"), "start with 'E'");
+		Condition<Optional<String>> optionalWithStartWithE =
+				MappedCondition.mappedCondition(Optional::get, startWithE, "optional value start with 'E'");
+
+		Assertions.assertThat(Optional.of("ETHOSENS"))
+				.is(optionalWithStartWithE);
+	}
+
+	/**
+	 * Conditionでの検証失敗時に失敗理由を詳しく表示
+	 */
+	@Test
+	void verboseCondition() {
+		Condition<String> shorterThan4 = VerboseCondition.verboseCondition(actual -> actual.length() < 4,
+				"shorter than 4",
+				s -> String.format(" but length was %d", s.length()));
+
+		Assertions.assertThat("E")
+				.is(shorterThan4);
 	}
 
 }
