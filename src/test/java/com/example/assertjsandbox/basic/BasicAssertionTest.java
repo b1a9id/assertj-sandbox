@@ -298,7 +298,7 @@ class BasicAssertionTest {
 				"shorter than 4",
 				s -> String.format(" but length was %d", s.length()));
 
-		Assertions.assertThat("ETHO")
+		Assertions.assertThat("E")
 				.is(shorterThan4);
 	}
 
