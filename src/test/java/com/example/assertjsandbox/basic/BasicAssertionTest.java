@@ -7,9 +7,11 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Optional;
 
 import org.assertj.core.api.Assertions;
 import org.assertj.core.api.Condition;
+import org.assertj.core.condition.MappedCondition;
 import org.junit.jupiter.api.Test;
 
 import com.example.assertjsandbox.model.Brand;
@@ -271,6 +273,19 @@ class BasicAssertionTest {
 				.asString(StandardCharsets.UTF_8)
 				.startsWith("a")
 				.endsWith("c");
+	}
+
+	/**
+	 * マッピングの処理結果をConditionで検証
+	 */
+	@Test
+	void mappedCondition() {
+		Condition<String> startWithE = new Condition<>(s -> s.startsWith("E"), "start with 'E'");
+		Condition<Optional<String>> optionalWithStartWithE =
+				MappedCondition.mappedCondition(Optional::get, startWithE, "optional value start with 'E'");
+
+		Assertions.assertThat(Optional.of("ETHOSENS"))
+				.is(optionalWithStartWithE);
 	}
 
 }
