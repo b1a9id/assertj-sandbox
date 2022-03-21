@@ -3,6 +3,7 @@ package com.example.assertjsandbox.basic;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
@@ -257,6 +258,19 @@ class BasicAssertionTest {
 				.containsIgnoringWhitespaces("favorite", "ETHOSENS")
 				.containsIgnoringWhitespaces("favoritebrand")
 				.containsIgnoringWhitespaces("isETHOSEN S");
+	}
+
+	/**
+	 * AbstractInputStreamAssertでStringとしての検証
+	 */
+	@Test
+	void inputStreamToString() {
+		var inputStream = new ByteArrayInputStream("abc".getBytes());
+
+		Assertions.assertThat(inputStream)
+				.asString(StandardCharsets.UTF_8)
+				.startsWith("a")
+				.endsWith("c");
 	}
 
 }
