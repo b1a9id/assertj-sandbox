@@ -12,6 +12,7 @@ import java.util.Optional;
 import org.assertj.core.api.Assertions;
 import org.assertj.core.api.Condition;
 import org.assertj.core.condition.MappedCondition;
+import org.assertj.core.condition.VerboseCondition;
 import org.junit.jupiter.api.Test;
 
 import com.example.assertjsandbox.model.Brand;
@@ -286,6 +287,19 @@ class BasicAssertionTest {
 
 		Assertions.assertThat(Optional.of("ETHOSENS"))
 				.is(optionalWithStartWithE);
+	}
+
+	/**
+	 * Conditionでの検証失敗時に失敗理由を詳しく表示
+	 */
+	@Test
+	void verboseCondition() {
+		Condition<String> shorterThan4 = VerboseCondition.verboseCondition(actual -> actual.length() < 4,
+				"shorter than 4",
+				s -> String.format(" but length was %s", s.length()));
+
+		Assertions.assertThat("ETHOSENS")
+				.is(shorterThan4);
 	}
 
 }
