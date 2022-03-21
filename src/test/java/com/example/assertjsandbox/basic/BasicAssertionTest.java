@@ -1,17 +1,18 @@
 package com.example.assertjsandbox.basic;
 
-import com.example.assertjsandbox.model.Brand;
-import com.example.assertjsandbox.model.Gender;
-import org.assertj.core.api.Assertions;
-import org.assertj.core.api.Condition;
-import org.junit.jupiter.api.Test;
-
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+
+import org.assertj.core.api.Assertions;
+import org.assertj.core.api.Condition;
+import org.junit.jupiter.api.Test;
+
+import com.example.assertjsandbox.model.Brand;
+import com.example.assertjsandbox.model.Gender;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -244,6 +245,18 @@ class BasicAssertionTest {
 
 		Path empty = Paths.get("src/test/resources/txt/no-content.txt");
 		Assertions.assertThat(empty).isEmptyFile();
+	}
+
+	/**
+	 * 空白を無視して文字列を含んでいるかの検証
+	 */
+	@Test
+	void containsIgnoringWhitespaces() {
+		Assertions.assertThat("My favorite brand is ETHOSENS")
+				.containsIgnoringWhitespaces("rand")
+				.containsIgnoringWhitespaces("favorite", "ETHOSENS")
+				.containsIgnoringWhitespaces("favoritebrand")
+				.containsIgnoringWhitespaces("isETHOSEN S");
 	}
 
 }
