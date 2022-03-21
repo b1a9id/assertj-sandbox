@@ -94,4 +94,20 @@ class IterableAssertionTest {
                 .hasSize(1)
                 .containsExactly(bedsidedrama);
     }
+
+    /**
+     * Iterable, 配列の型が正しいかの検証
+     */
+    @Test
+    void hasExactlyElementsOfTypes() {
+        var stof = new Brand("stof", "Tanita", Gender.MAN);
+
+        Iterable<Object> list = List.of(1, "a", stof);
+        Assertions.assertThat(list)
+                .hasExactlyElementsOfTypes(Integer.class, String.class, Brand.class);
+
+        Object[] array = { 1, "a", stof };
+        Assertions.assertThat(array)
+                .hasExactlyElementsOfTypes(Integer.class, String.class, Brand.class);
+    }
 }
