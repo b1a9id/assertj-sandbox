@@ -296,9 +296,9 @@ class BasicAssertionTest {
 	void verboseCondition() {
 		Condition<String> shorterThan4 = VerboseCondition.verboseCondition(actual -> actual.length() < 4,
 				"shorter than 4",
-				s -> String.format(" but length was %s", s.length()));
+				s -> String.format(" but length was %d", s.length()));
 
-		Assertions.assertThat("ETHOSENS")
+		Assertions.assertThat("ETHO")
 				.is(shorterThan4);
 	}
 
