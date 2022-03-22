@@ -1,5 +1,8 @@
 package com.example.assertjsandbox.number;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -64,5 +67,14 @@ class NumberAssertionTest {
 	void isNotInfinite() {
 		Assertions.assertThat(1.0).isNotInfinite();
 		Assertions.assertThat(Double.NaN).isNotInfinite();
+	}
+
+	/**
+	 * 小数点以下の桁数の検証
+	 */
+	@Test
+	void hasScaleOf() {
+		Assertions.assertThat(new BigDecimal("8.00")).hasScaleOf(2);
+		Assertions.assertThat(new BigDecimal("8.00").setScale(4, RoundingMode.UP)).hasScaleOf(4);
 	}
 }

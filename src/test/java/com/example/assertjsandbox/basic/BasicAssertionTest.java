@@ -302,4 +302,75 @@ class BasicAssertionTest {
 				.is(shorterThan4);
 	}
 
+	/**
+	 * Path/Fileの中身の文字列を検証
+	 */
+	@Test
+	void contentStringAssert() {
+		var penTextPath = Paths.get("src/test/resources/txt/pen.txt");
+		var penTextFile = penTextPath.toFile();
+		Assertions.assertThat(penTextPath).content()
+				.startsWith("This is a");
+		Assertions.assertThat(penTextFile).content()
+				.startsWith("This is a");
+
+		var noUtf8TextPath = Paths.get("src/test/resources/txt/no-utf8.txt");
+		var noUtf8TextFile = noUtf8TextPath.toFile();
+		Assertions.assertThat(noUtf8TextPath).content(StandardCharsets.UTF_8)
+				.startsWith("é");
+		Assertions.assertThat(noUtf8TextFile).content(StandardCharsets.UTF_8)
+				.startsWith("é");
+	}
+
+	/**
+	 * Path/Fileの中身のバイト数を検証
+	 */
+	@Test
+	void hasSizeInBytes() {
+		var path = Paths.get("src/test/resources/txt/fox.txt");
+		var file = path.toFile();
+		Assertions.assertThat(path).hasSize(21);
+		Assertions.assertThat(file).hasSize(21);
+	}
+
+	/**
+	 * 文字列に大文字/小文字が混合しているかを検証
+	 */
+	@Test
+	void isMixedCase() {
+		assertThat("Capitalized").isMixedCase();
+		assertThat("camelCase").isMixedCase();
+		assertThat("rAndOMcAse1234").isMixedCase();
+		assertThat("1@3$567").isMixedCase();
+		assertThat("").isMixedCase();
+	}
+
+	/**
+	 * 文字列が指定した文字のどれかを含んでいるかを検証
+	 */
+	@Test
+	void containsAnyOf() {
+		assertThat("Gandalf the grey").containsAnyOf("grey", "black");
+	}
+
+	/**
+	 * Path/Fileのファイルが指定した拡張子を持っているかを検証
+	 */
+	@Test
+	void hasExtension() {
+		var path = Paths.get("src/test/resources/txt/has-extension.txt");
+		assertThat(path).hasExtension("txt");
+		assertThat(path.toFile()).hasExtension("txt");
+	}
+
+	/**
+	 * Path/Fileのファイルが拡張子を持ってないことを検証
+	 */
+	@Test
+	void hasNoExtension() {
+		var path = Paths.get("src/test/resources/no-extension");
+		assertThat(path).hasNoExtension();
+		assertThat(path.toFile()).hasNoExtension();
+	}
+
 }

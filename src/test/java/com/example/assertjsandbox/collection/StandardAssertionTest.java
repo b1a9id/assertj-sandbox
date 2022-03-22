@@ -1,6 +1,9 @@
 package com.example.assertjsandbox.collection;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -131,5 +134,18 @@ class StandardAssertionTest {
 			Assertions.assertThat(v.prefecture()).isEqualTo("東京都");
 			Assertions.assertThat(v.following()).isEqualTo("千代田区千代田");
 		});
+	}
+
+	/**
+	 * コレクションが変更不可かの検証
+	 */
+	@Test
+	void isUnmodifiable() {
+		Assertions.assertThat(Collections.unmodifiableCollection(new ArrayList<>()))
+				.isUnmodifiable();
+		Assertions.assertThat(Collections.unmodifiableList(new ArrayList<>()))
+				.isUnmodifiable();
+		Assertions.assertThat(Collections.unmodifiableSet(new HashSet<>()))
+				.isUnmodifiable();
 	}
 }
