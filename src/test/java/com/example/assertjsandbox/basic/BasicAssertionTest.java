@@ -353,4 +353,14 @@ class BasicAssertionTest {
 		assertThat("Gandalf the grey").containsAnyOf("grey", "black");
 	}
 
+	/**
+	 * Path/Fileのファイルが指定した拡張子を持っているかを検証
+	 */
+	@Test
+	void hasExtension() {
+		var path = Paths.get("src/test/resources/txt/has-extension.txt");
+		assertThat(path).hasExtension("txt");
+		assertThat(path.toFile()).hasExtension("txt");
+	}
+
 }
