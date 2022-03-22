@@ -363,4 +363,14 @@ class BasicAssertionTest {
 		assertThat(path.toFile()).hasExtension("txt");
 	}
 
+	/**
+	 * Path/Fileのファイルが拡張子を持ってないことを検証
+	 */
+	@Test
+	void hasNoExtension() {
+		var path = Paths.get("src/test/resources/no-extension");
+		assertThat(path).hasNoExtension();
+		assertThat(path.toFile()).hasNoExtension();
+	}
+
 }
