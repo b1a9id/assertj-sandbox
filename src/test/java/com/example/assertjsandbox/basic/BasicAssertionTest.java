@@ -333,4 +333,16 @@ class BasicAssertionTest {
 		Assertions.assertThat(file).hasSize(21);
 	}
 
+	/**
+	 * 文字列に大文字/小文字が混合しているかを検証
+	 */
+	@Test
+	void isMixedCase() {
+		assertThat("Capitalized").isMixedCase();
+		assertThat("camelCase").isMixedCase();
+		assertThat("rAndOMcAse1234").isMixedCase();
+		assertThat("1@3$567").isMixedCase();
+		assertThat("").isMixedCase();
+	}
+
 }
