@@ -302,4 +302,24 @@ class BasicAssertionTest {
 				.is(shorterThan4);
 	}
 
+	/**
+	 * Path/Fileの中身の文字列を検証する
+	 */
+	@Test
+	void contentStringAssert() {
+		var penTextPath = Paths.get("src/test/resources/txt/pen.txt");
+		var penTextFile = penTextPath.toFile();
+		Assertions.assertThat(penTextPath).content()
+				.startsWith("This is a");
+		Assertions.assertThat(penTextFile).content()
+				.startsWith("This is a");
+
+		var noUtf8TextPath = Paths.get("src/test/resources/txt/no-utf8.txt");
+		var noUtf8TextFile = noUtf8TextPath.toFile();
+		Assertions.assertThat(noUtf8TextPath).content(StandardCharsets.UTF_8)
+				.startsWith("é");
+		Assertions.assertThat(noUtf8TextFile).content(StandardCharsets.UTF_8)
+				.startsWith("é");
+	}
+
 }
