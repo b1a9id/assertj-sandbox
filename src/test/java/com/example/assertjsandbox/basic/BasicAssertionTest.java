@@ -303,7 +303,7 @@ class BasicAssertionTest {
 	}
 
 	/**
-	 * Path/Fileの中身の文字列を検証する
+	 * Path/Fileの中身の文字列を検証
 	 */
 	@Test
 	void contentStringAssert() {
@@ -320,6 +320,17 @@ class BasicAssertionTest {
 				.startsWith("é");
 		Assertions.assertThat(noUtf8TextFile).content(StandardCharsets.UTF_8)
 				.startsWith("é");
+	}
+
+	/**
+	 * Path/Fileの中身のバイト数を検証
+	 */
+	@Test
+	void hasSizeInBytes() {
+		var path = Paths.get("src/test/resources/txt/fox.txt");
+		var file = path.toFile();
+		Assertions.assertThat(path).hasSize(21);
+		Assertions.assertThat(file).hasSize(21);
 	}
 
 }
