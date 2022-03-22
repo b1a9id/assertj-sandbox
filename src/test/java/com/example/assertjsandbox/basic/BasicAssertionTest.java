@@ -345,4 +345,12 @@ class BasicAssertionTest {
 		assertThat("").isMixedCase();
 	}
 
+	/**
+	 * 文字列が指定した文字のどれかを含んでいるかを検証
+	 */
+	@Test
+	void containsAnyOf() {
+		assertThat("Gandalf the grey").containsAnyOf("grey", "black");
+	}
+
 }
