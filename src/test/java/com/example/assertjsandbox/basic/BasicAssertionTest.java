@@ -2,6 +2,7 @@ package com.example.assertjsandbox.basic;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.net.URI;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
@@ -396,6 +397,15 @@ class BasicAssertionTest {
 		String[] hashimotoBrands = { "ETHOSENS" };
 		assertThat(hashimotoBrands).singleElement().isEqualTo("ETHOSENS");
 		assertThat(hashimotoBrands).singleElement(as(STRING)).isUpperCase();
+	}
+
+	/**
+	 * URI/URLがhostを含んでないことを検証
+	 */
+	@Test
+	void hasNotHost() throws Exception {
+		Assertions.assertThat(new URI("file:///home/user/Documents/hello-world.txt")).hasNoHost();
+		Assertions.assertThat(new URL("file:///home/user/Documents/hello-world.txt")).hasNoHost();
 	}
 
 }
