@@ -18,7 +18,9 @@ import org.junit.jupiter.api.Test;
 import com.example.assertjsandbox.model.Brand;
 import com.example.assertjsandbox.model.Gender;
 
+import static org.assertj.core.api.Assertions.as;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.InstanceOfAssertFactories.STRING;
 
 class BasicAssertionTest {
 
@@ -384,6 +386,16 @@ class BasicAssertionTest {
 				.isLessThan(10L)
 				.returnToFile()
 				.hasBinaryContent("TEST\n".getBytes(StandardCharsets.UTF_8));
+	}
+
+	/**
+	 * 単一要素配列の型を指定して要素の検証
+	 */
+	@Test
+	void singleElementForObjectArray() {
+		String[] hashimotoBrands = { "ETHOSENS" };
+		assertThat(hashimotoBrands).singleElement().isEqualTo("ETHOSENS");
+		assertThat(hashimotoBrands).singleElement(as(STRING)).isUpperCase();
 	}
 
 }
