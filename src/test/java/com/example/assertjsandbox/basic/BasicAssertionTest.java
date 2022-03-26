@@ -150,11 +150,11 @@ class BasicAssertionTest {
 	@Test
 	void assertDecodedAsBase64() {
 		Assertions.assertThat("QXNzZXJ0Sg==")
-				.decodedAsBase64()
+				.asBase64Decoded()
 				.containsExactly("AssertJ".getBytes());
 		// パディングなし
 		Assertions.assertThat("QXNzZXJ0Sg")
-				.decodedAsBase64()
+				.asBase64Decoded()
 				.containsExactly("AssertJ".getBytes());
 	}
 
