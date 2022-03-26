@@ -373,4 +373,17 @@ class BasicAssertionTest {
 		assertThat(path.toFile()).hasNoExtension();
 	}
 
+	/**
+	 * ファイルサイズの検証とファイルの中身の検証
+	 */
+	@Test
+	void fileContentAssert() {
+		var file = Paths.get("src/test/resources/txt/file-size.txt").toFile();
+		assertThat(file).size()
+				.isGreaterThan(1L)
+				.isLessThan(10L)
+				.returnToFile()
+				.hasBinaryContent("TEST\n".getBytes(StandardCharsets.UTF_8));
+	}
+
 }
