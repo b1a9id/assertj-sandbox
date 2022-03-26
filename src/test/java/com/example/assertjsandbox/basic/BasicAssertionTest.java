@@ -21,6 +21,7 @@ import com.example.assertjsandbox.model.Gender;
 
 import static org.assertj.core.api.Assertions.as;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.from;
 import static org.assertj.core.api.InstanceOfAssertFactories.STRING;
 
 class BasicAssertionTest {
@@ -406,6 +407,18 @@ class BasicAssertionTest {
 	void hasNotHost() throws Exception {
 		Assertions.assertThat(new URI("file:///home/user/Documents/hello-world.txt")).hasNoHost();
 		Assertions.assertThat(new URL("file:///home/user/Documents/hello-world.txt")).hasNoHost();
+	}
+
+	/**
+	 * 戻り値の検証
+	 */
+	@Test
+	void doesNotReturn() {
+		Brand stof = new Brand("stof", "Tanita", Gender.MAN);
+		assertThat(stof)
+				.doesNotReturn("ETHOSENS", from(Brand::name))
+				.doesNotReturn("ETHOSENS", Brand::name)
+				.returns("stof", Brand::name);
 	}
 
 }
