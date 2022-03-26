@@ -2,6 +2,7 @@ package com.example.assertjsandbox.basic;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.net.URI;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
@@ -18,7 +19,10 @@ import org.junit.jupiter.api.Test;
 import com.example.assertjsandbox.model.Brand;
 import com.example.assertjsandbox.model.Gender;
 
+import static org.assertj.core.api.Assertions.as;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.from;
+import static org.assertj.core.api.InstanceOfAssertFactories.STRING;
 
 class BasicAssertionTest {
 
@@ -150,11 +154,11 @@ class BasicAssertionTest {
 	@Test
 	void assertDecodedAsBase64() {
 		Assertions.assertThat("QXNzZXJ0Sg==")
-				.decodedAsBase64()
+				.asBase64Decoded()
 				.containsExactly("AssertJ".getBytes());
 		// パディングなし
 		Assertions.assertThat("QXNzZXJ0Sg")
-				.decodedAsBase64()
+				.asBase64Decoded()
 				.containsExactly("AssertJ".getBytes());
 	}
 
@@ -371,6 +375,50 @@ class BasicAssertionTest {
 		var path = Paths.get("src/test/resources/no-extension");
 		assertThat(path).hasNoExtension();
 		assertThat(path.toFile()).hasNoExtension();
+	}
+
+	/**
+	 * ファイルサイズの検証とファイルの中身の検証
+	 */
+	@Test
+	void fileContentAssert() {
+		var file = Paths.get("src/test/resources/txt/file-size.txt").toFile();
+		assertThat(file).size()
+				.isGreaterThan(1L)
+				.isLessThan(10L)
+				.returnToFile()
+				.hasBinaryContent("TEST\n".getBytes(StandardCharsets.UTF_8));
+	}
+
+	/**
+	 * 単一要素配列の型を指定して要素の検証
+	 */
+	@Test
+	void singleElementForObjectArray() {
+		String[] hashimotoBrands = { "ETHOSENS" };
+		assertThat(hashimotoBrands).singleElement().isEqualTo("ETHOSENS");
+		assertThat(hashimotoBrands).singleElement(as(STRING)).isUpperCase();
+	}
+
+	/**
+	 * URI/URLがhostを含んでないことを検証
+	 */
+	@Test
+	void hasNotHost() throws Exception {
+		Assertions.assertThat(new URI("file:///home/user/Documents/hello-world.txt")).hasNoHost();
+		Assertions.assertThat(new URL("file:///home/user/Documents/hello-world.txt")).hasNoHost();
+	}
+
+	/**
+	 * 戻り値の検証
+	 */
+	@Test
+	void doesNotReturn() {
+		Brand stof = new Brand("stof", "Tanita", Gender.MAN);
+		assertThat(stof)
+				.doesNotReturn("ETHOSENS", from(Brand::name))
+				.doesNotReturn("ETHOSENS", Brand::name)
+				.returns("stof", Brand::name);
 	}
 
 }

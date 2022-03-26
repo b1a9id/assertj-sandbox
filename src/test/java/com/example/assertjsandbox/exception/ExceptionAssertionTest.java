@@ -103,4 +103,16 @@ class ExceptionAssertionTest {
 				.withMessage("root cause message");
 	}
 
+	/**
+	 * メッセージの抽出をショートカットできる message() メソッド
+	 */
+	@Test
+	void extractingMessageShorCut() {
+		Throwable throwable = new NullPointerException("null pointer exception!");
+		Assertions.assertThat(throwable)
+				.message()
+				.startsWith("null")
+				.endsWith("!");
+	}
+
 }
