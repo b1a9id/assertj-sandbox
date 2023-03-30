@@ -7,6 +7,10 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.Month;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,6 +18,7 @@ import org.assertj.core.api.Assertions;
 import org.assertj.core.api.Condition;
 import org.assertj.core.condition.MappedCondition;
 import org.assertj.core.condition.VerboseCondition;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import com.example.assertjsandbox.model.Brand;
@@ -22,6 +27,7 @@ import com.example.assertjsandbox.model.Gender;
 import static org.assertj.core.api.Assertions.as;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.from;
+import static org.assertj.core.api.InstanceOfAssertFactories.LOCAL_DATE_TIME;
 import static org.assertj.core.api.InstanceOfAssertFactories.STRING;
 
 class BasicAssertionTest {
@@ -419,6 +425,43 @@ class BasicAssertionTest {
 				.doesNotReturn("ETHOSENS", from(Brand::name))
 				.doesNotReturn("ETHOSENS", Brand::name)
 				.returns("stof", Brand::name);
+	}
+
+	@DisplayName("LocalDateの検証")
+	@Test
+	void assertLocalDate() {
+		assertThat(LocalDate.of(2023, 3, 30))
+				.hasYear(2023)
+				.hasMonth(Month.MARCH)
+				.hasMonthValue(3)
+				.hasDayOfMonth(30);
+	}
+
+	@DisplayName("LocalTimeの検証")
+	@Test
+	void assertLocalTime() {
+		assertThat(LocalTime.of(23, 17, 59, 5))
+				.hasHour(23)
+				.hasMinute(17)
+				.hasSecond(59)
+				.hasNano(5);
+	}
+
+	@DisplayName("LocalDateTimeの検証")
+	@Test
+	void assertLocalDateTime() {
+		var dateTime = LocalDateTime.of(
+				LocalDate.of(2023, 3, 30),
+				LocalTime.of(23, 59, 5)
+		);
+		assertThat(dateTime)
+				.hasYear(2023)
+				.hasMonth(Month.MARCH)
+				.hasMonthValue(3)
+				.hasDayOfMonth(30)
+				.hasHour(23)
+				.hasMinute(59)
+				.hasSecond(5);
 	}
 
 }
