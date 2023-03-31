@@ -1,6 +1,7 @@
 package com.example.assertjsandbox.object;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -74,6 +75,9 @@ class ObjectAssertionTest {
 		Assertions.assertThat(stof)
 				.usingRecursiveComparison()
 				.isEqualTo(cloneStof);
+		assertThat(stof)
+				.usingRecursiveAssertion()
+				.allFieldsSatisfy(Objects::nonNull);
 	}
 
 	/**
